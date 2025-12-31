@@ -1,0 +1,481 @@
+/*
+Theme Name: Little Rose Art Theme
+Author: Petal Three
+Description: Bản thiết kế cao cấp cho Quỹ Bông Hồng Nhỏ (Loading nhịp thở, Menu in đậm, Footer trượt).
+Version: 1.0
+*/
+/* CSS bổ sung để đảm bảo hiển thị "đều" và "đẹp" ngay lập tức */
+  .hero-custom {
+    /* 1. Giữ độ cao và căn giữa nội dung */
+    height: 90vh; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+
+    /* 2. THÊM ẢNH NỀN VÀ LỚP PHỦ ĐEN (Để làm nổi chữ trắng) */
+    /* Bạn có thể thay link ảnh ở url() bên dưới */
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                 url('img/background.jpg') no-repeat center center;
+    
+    background-size: cover; /* Ảnh luôn lấp đầy */
+    background-attachment: fixed; /* Hiệu ứng cuộn trang sang trọng */
+}
+
+/* Đảm bảo cánh hoa rơi nằm trên ảnh nhưng dưới chữ */
+#petal-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Nằm trên ảnh */
+}
+
+/* Đảm bảo khối nội dung (chữ và nút) nằm trên cùng */
+.hero-custom .container {
+    position: relative;
+    z-index: 5 !important;
+}
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .btn-outline-white {
+            border: 2px solid white;
+            color: white;
+            padding: 12px 35px;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+        .btn-outline-white:hover {
+            background: white;
+            color: #E30613;
+        }
+        .section-padding { padding: 100px 0; }
+        .stat-card {
+            padding: 40px;
+            border: 1px solid #eee;
+            transition: all 0.4s ease;
+            background: white;
+            height: 100%;
+        }
+        
+         /* --- 3. HIỆU ỨNG ĐƯỜNG LIÊN KẾT (GIỐNG TRONG ẢNH) --- */
+        .social-list { list-style: none; padding: 0; }
+        .social-link-item {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #adb5bd; /* Màu chữ mặc định hơi xám sang trọng */
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .social-icon-box {
+            width: 40px;
+            text-align: center;
+            font-size: 1.3rem;
+            margin-right: 15px;
+            transition: all 0.4s ease;
+        }
+        /* Hiệu ứng khi hover: Chữ sáng lên và trượt sang phải */
+        .social-link-item:hover {
+            color: #ffffff;
+            transform: translateX(12px); /* Trượt ngang */
+        }
+        /* Màu sắc icon đặc trưng khi hover */
+        .social-link-item:hover .fa-globe { color: var(--primary-green); }
+        .social-link-item:hover .fa-facebook { color: #1877F2; }
+        .social-link-item:hover .fa-tiktok { color: #ff0050; }
+        .social-link-item:hover .fa-instagram { color: #E4405F; }
+
+        .stat-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        .img-premium {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: all 0.5s;
+        }
+        .project-card:hover .img-premium { transform: scale(1.05); }
+        /* 1. TYPOGRAPHY & NỀN TẢNG (Apple & Pizza 4P's Style) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap');
+
+:root {
+    --primary-green: #008D42;
+    --primary-red: #E30613;
+    --text-deep: #1A1A1A;
+    --text-muted: #666666;
+    --bg-warm: #FDFBFA; /* Màu kem nhạt sang trọng */
+    --white: #ffffff;
+    --transition-premium: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    background-color: var(--bg-warm);
+    font-size: 16px;
+    color: #212529;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, .serif {
+    font-family: 'Playfair Display', serif !important;
+    letter-spacing: -0.01em;
+    font-weight: 900; /* Dày bản như ảnh mẫu */
+}
+
+
+/* --- LOADING NHỊP ĐẬP TRÁI TIM & TỎA SÁNG (PLUSHING) --- */
+/* --- LOADING TRÁI TIM NHÂN ÁI (PURE CSS) --- */
+/* --- LOADING TRÁI TIM CHUẨN NHÂN ÁI --- */
+#preloader {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+/* Vẽ trái tim theo kỹ thuật Diamond + Circle */
+.heart-pulse {
+    position: relative;
+    width: 60px;  /* Độ lớn trái tim */
+    height: 60px;
+    background-color: #B12029; /* Màu đỏ chuẩn LRF */
+    transform: rotate(-45deg); /* Xoay hình vuông thành hình thoi */
+    animation: heartbeatPlushing 1.2s infinite ease-in-out;
+    margin-top: 30px; /* Căn chỉnh vị trí */
+}
+
+.heart-pulse::before,
+.heart-pulse::after {
+    content: "";
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-color: #B12029;
+    border-radius: 50%; /* Tạo thành hình tròn */
+}
+
+/* Đẩy hình tròn lên trên */
+.heart-pulse::before {
+    top: -30px;
+    left: 0;
+}
+
+/* Đẩy hình tròn sang phải */
+.heart-pulse::after {
+    top: 0;
+    left: 30px;
+}
+
+/* Hiệu ứng nhịp đập & Tỏa sáng (Quan trọng: phải giữ nguyên rotate(-45deg)) */
+@keyframes heartbeatPlushing {
+    0% { 
+        transform: scale(1) rotate(-45deg); 
+        filter: drop-shadow(0 0 5px rgba(177, 32, 41, 0.2)); 
+    }
+    14% { 
+        transform: scale(1.15) rotate(-45deg); /* Nhịp 1 */
+        filter: drop-shadow(0 0 20px rgba(177, 32, 41, 0.6)); 
+    }
+    28% { 
+        transform: scale(1.05) rotate(-45deg); 
+    }
+    42% { 
+        transform: scale(1.3) rotate(-45deg); /* Nhịp 2 mạnh hơn */
+        filter: drop-shadow(0 0 40px rgba(177, 32, 41, 0.8)); 
+    }
+    70% { 
+        transform: scale(1) rotate(-45deg); 
+        filter: drop-shadow(0 0 5px rgba(177, 32, 41, 0.2));
+    }
+}
+
+/* 3. NAVIGATION (In đậm & Gạch chân Ngôn ngữ) */
+.navbar {
+    padding: 1rem 0;
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.nav-link {
+    font-weight: 800 !important; /* In đậm toàn bộ menu */
+    color: var(--text-deep) !important;
+    transition: var(--transition-premium);
+    font-size: 0.95rem;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--primary-green) !important;
+}
+
+.lang-switch {
+    font-weight: 800 !important;
+    cursor: pointer;
+    color: #999;
+    padding-bottom: 2px;
+    transition: 0.3s;
+}
+
+.lang-switch.active {
+    color: var(--primary-green) !important;
+    border-bottom: 2px solid var(--primary-green); /* Gạch chân xanh */
+}
+/* ÉP NÚT TRONG CARD GIỐNG HỆT NÚT MENU */
+.btn-donate-card {
+    background-color: #E30613 !important; /* Màu đỏ chuẩn LRF */
+    color: #ffffff !important;           /* Chữ trắng tinh */
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-weight: 800 !important;         /* Siêu đậm */
+    text-transform: uppercase !important; /* Viết hoa toàn bộ */
+    font-size: 0.85rem !important;
+    letter-spacing: 1px;
+    
+    display: block;             /* Để nút rộng ra */
+    width: 100%;                /* Phủ hết chiều ngang card */
+    padding: 12px 20px !important;
+    border-radius: 50px !important; /* Bo tròn hình viên thuốc */
+    border: none !important;
+    text-decoration: none !important; /* Xóa bỏ gạch chân xanh */
+    text-align: center;
+    
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(227, 6, 19, 0.2) !important; /* Đổ bóng nhẹ cho sang */
+}
+
+.btn-donate-card:hover {
+    background-color: #b30510 !important; /* Đỏ đậm hơn khi rà chuột */
+    transform: translateY(-3px);          /* Nổi lên nhẹ */
+    box-shadow: 0 8px 20px rgba(227, 6, 19, 0.3) !important;
+    color: #ffffff !important;
+}
+/* 5. HERO SECTION (Balanced & Professional) */
+
+.hero-custom {
+    height: 90vh; /* Tăng lên 90vh cho sang trọng giống Apple */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden; /* Giữ cánh hoa bên trong banner */
+
+    /* CỐT LÕI: THÊM ẢNH NỀN TẠI ĐÂY */
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                     url('img/back.jpg') no-repeat center center;
+    
+    background-size: cover;
+    background-attachment: fixed; /* Hiệu ứng cuộn mượt mà */
+}
+
+/* Đảm bảo chữ trắng nổi bật trên nền ảnh */
+.hero-custom h1, .hero-custom p {
+    color: white !important;
+}
+
+/* Đảm bảo khối nội dung nằm trên cánh hoa */
+.hero-custom .container {
+    position: relative;
+    z-index: 5 !important;
+}
+
+/* --- HIỆU ỨNG CÁNH HOA RƠI --- */
+.petal {
+    position: absolute;
+    background-color: #ffdde1; 
+    border-radius: 150% 0 150% 0; 
+    opacity: 0.4; /* Tăng độ rõ của cánh hoa lên một chút */
+    z-index: 1; /* Nằm dưới chữ nhưng trên ảnh nền */
+    pointer-events: none;
+    animation: fall linear infinite;
+}
+
+/* Các kiểu dáng cánh hoa khác nhau */
+.petal:nth-child(2n) { background-color: #ffafbd; }
+.petal:nth-child(3n) { width: 15px; height: 20px; border-radius: 50% 50% 50% 0; }
+
+@keyframes fall {
+    0% {
+        top: -10%;
+        transform: translateX(0) rotate(0deg);
+    }
+    100% {
+        top: 110%;
+        transform: translateX(100px) rotate(360deg);
+    }
+}
+
+/* Các class phụ để giữ layout đều */
+.hero-btns { display: flex; justify-content: center; gap: 20px; }
+/* 6. IMPACT & STATS (Transparency - UNICEF Style) */
+.section-padding { padding: 120px 0; }
+
+.stat-card {
+    padding: 50px 30px;
+    background: var(--white);
+    border: 1px solid rgba(0,0,0,0.03);
+    transition: var(--transition-premium);
+}
+
+.stat-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.06);
+}
+
+.stat-number {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--primary-green);
+    font-family: 'Playfair Display', serif;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.divider { width: 50px; height: 3px; background: var(--primary-red); margin: 20px auto; }
+
+/* 7. IMAGE SYSTEM (Premium Content) */
+.img-premium {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    transition: var(--transition-premium);
+    filter: brightness(0.9) contrast(1.1);
+}
+
+.project-card:hover .img-premium {
+    filter: brightness(1);
+    transform: scale(1.05);
+}
+
+/* 8. DOCUMENT & RESOURCES (Expert UX) */
+.doc-link {
+    display: flex;
+    align-items: center;
+    padding: 25px;
+    background: var(--white);
+    border-bottom: 1px solid #eee;
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s;
+}
+
+.doc-link:hover {
+    background: #f9f9f9;
+    padding-left: 35px;
+}
+
+/* STYLE COOKIE BANNER LUXURY */
+.cookie-banner-luxury {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #E6A08A; /* Màu nền giống ảnh mẫu */
+    color: #1a1a1a;
+    padding: 30px 50px;
+    z-index: 11000;
+    box-shadow: 0 -5px 30px rgba(0,0,0,0.15);
+    font-family: Helvetica, Arial, sans-serif !important;
+    display: none; /* Mặc định ẩn, hiện bằng JS */
+}
+
+.cookie-text { font-size: 0.95rem; line-height: 1.6; }
+.cookie-link { color: #b34d3d; font-weight: 700; text-decoration: underline; }
+
+/* Custom Switch màu đỏ/nâu cho giống ảnh */
+.form-check-input:checked {
+    background-color: #b34d3d !important;
+    border-color: #b34d3d !important;
+}
+
+/* Nút bấm bên phải */
+.btn-cookie-primary { background-color: #b34d3d; color: white; border-radius: 8px; font-weight: 700; padding: 10px; border: none; }
+.btn-cookie-secondary { background-color: #b34d3d; color: white; border-radius: 8px; font-weight: 700; padding: 10px; border: none; }
+.btn-cookie-outline { border: 1px solid #b34d3d; color: #b34d3d; border-radius: 8px; font-weight: 700; padding: 10px; background: transparent; }
+
+.btn-cookie-primary:hover, .btn-cookie-secondary:hover { opacity: 0.9; transform: translateY(-2px); transition: 0.3s; }
+
+.close-banner {
+    position: absolute; top: 10px; right: 15px; background: none; border: none; font-size: 2rem; color: #1a1a1a; cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .cookie-banner-luxury { padding: 20px; }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 2.5rem; }
+    .stat-number { font-size: 2.5rem; }
+    #cookie-banner { bottom: 0; left: 0; right: 0; flex-direction: column; text-align: center; }
+}
+/* --- STYLE ĐỐI TÁC LUXURY --- */
+/* --- PHẦN ĐỐI TÁC VÀ NHÀ HẢO TÂM V2 --- */
+/* --- PHẦN ĐỐI TÁC VÀ NHÀ HẢO TÂM V2 - ĐÃ FIX --- */
+.partner-wrapper {
+    padding: 0 40px !important;
+    width: 100% !important;
+}
+
+/* ÉP KHUNG BAO PHẢI CỐ ĐỊNH KÍCH THƯỚC */
+.partner-card-v2 {
+    background: #ffffff !important;
+    border: 1px solid #f0f0f0 !important;
+    border-radius: 12px !important;
+    height: 140px !important; 
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 25px !important;
+    margin-bottom: 20px !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.02) !important;
+    overflow: hidden !important; 
+    transition: all 0.4s ease !important;
+}
+
+/* ÉP ẢNH PHẢI NẰM GỌN TRONG HỘP, KHÔNG ĐƯỢC TRÀN */
+.partner-card-v2 img {
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important; /* Không rộng quá chiều ngang hộp */
+    max-height: 80px !important; /* Không cao quá 80px */
+    object-fit: contain !important; /* Chống méo ảnh */
+    filter: grayscale(100%);
+    opacity: 0.7;
+    transition: all 0.4s ease !important;
+}
+
+/* Hiệu ứng khi hover */
+.partner-box-link:hover .partner-card-v2 {
+    transform: translateY(-8px) !important;
+    border-color: #2A7050 !important;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
+}
+
+.partner-box-link:hover img {
+    filter: grayscale(0%) !important;
+    opacity: 1 !important;
+    transform: scale(1.05) !important;
+}
