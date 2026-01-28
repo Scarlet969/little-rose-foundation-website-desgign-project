@@ -23,67 +23,35 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
---
--- Cấu trúc bảng cho bảng `donation`
---
+-- Thiết lập bảng Danh sách dự án (Để người dùng chọn dự án muốn đóng góp)
+CREATE TABLE IF NOT EXISTS `lrf_projects` (
+  `project_id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_name` varchar(255) NOT NULL,
+  `target_amount` bigint(20) DEFAULT 0,
+  `current_amount` bigint(20) DEFAULT 0,
+  `urgency_level` varchar(50) DEFAULT 'Bình thường', -- Cấp độ: Khẩn cấp, Cao, Bình thường
+  PRIMARY KEY (`project_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `donation` (
-  `id` int(11) NOT NULL,
+-- Gộp bảng Donation (Thêm trường project_id để biết đóng góp vào đâu)
+CREATE TABLE IF NOT EXISTS `lrf_donations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `fullname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `amount` bigint(20) NOT NULL,
+  `project_id` int(11) DEFAULT NULL, -- Liên kết tới dự án
   `message` text DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `transaction_code` varchar(50) DEFAULT NULL, -- Mã giao dịch để tăng độ tin cậy
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`project_id`) REFERENCES `lrf_projects`(`project_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Đang đổ dữ liệu cho bảng `donation`
---
-
-INSERT INTO `donation` (`id`, `fullname`, `email`, `amount`, `message`, `created_at`) VALUES
-(1, 'Bà Hoàng Thị Lệ Trinh', 'letrinh@gmail.com', 98000000, 'Ủng hộ Quỹ Bông Hồng Nhỏ phát triển giáo dục.', '2025-12-25 02:30:00'),
-(2, 'Cty TNHH TMDV Tân Hiệp Phát', 'contact@thp.com.vn', 650000000, 'Đồng hành cùng trẻ em mồ côi.', '2025-12-26 07:20:00'),
-(3, 'Nguyễn Đức Thạch Diễm - Sacombank', 'diem.nt@sacombank.com', 500000000, 'Gieo mầm hy vọng cho tương lai.', '2025-12-27 03:15:00'),
-(4, 'Công ty Trương Hoàng Phát', 'info@thp.vn', 750000000, 'Chung tay vì cộng đồng nhân ái.', '2025-12-28 08:30:00'),
-(5, 'Cty Kiểm toán Deloitte VN', 'office@deloitte.vn', 12000000, 'Hỗ trợ các chương trình y tế học đường.', '2025-12-29 04:00:00'),
-(6, 'Nguyễn Hoàng Thy Ân', 'thyan0358@gmail.com', 10000000, 'Tấm lòng nhỏ gửi đến các em.', '2025-12-30 18:38:32');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `donations`
---
-
-CREATE TABLE `donations` (
-  `id` int(11) NOT NULL,
-  `fullname` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `message` text DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `donations`
---
-
-INSERT INTO `donations` (`id`, `fullname`, `email`, `message`, `created_at`) VALUES
-(1, 'Nguyễn Hoàng Thy Ân', 'thyan0358@gmail.com', 'tốt', '2025-12-27 18:38:32'),
-(2, 'Nguyễn Hoàng Thy Ân', 'Hondakai2000@gmail.com', 'Hi', '2025-12-27 18:44:57'),
-(3, 'Nguyễn Hoàng Thy Ân', 'Hondakai2000@gmail.com', 'Hi', '2025-12-27 18:45:37'),
-(4, 'Nguyễn Hoàng Thy Ân', 'Hondakai2000@gmail.com', 'Hi', '2025-12-27 18:48:12'),
-(5, 'Nguyễn Hoàng Thy Ân', 'Hondakai2000@gmail.com', 'Hi', '2025-12-27 18:51:56'),
-(6, 'Nguyễn Hoàng Thy Ân', 'Hondakai2000@gmail.com', 'Hi', '2025-12-27 18:52:37'),
-(7, 'Nguyễn Hoàng Thy Ân', 'Hondakai2000@gmail.com', 'Hi', '2025-12-27 18:52:55'),
-(8, 'Nguyễn Hoàng Thy Ân', 'Hondakai2000@gmail.com', 'Hi', '2025-12-27 18:53:41'),
-(9, 'Nguyễn Thị Mỹ Phương', 'thyan2030@gmail.com', 'Hello konichiwa ', '2025-12-27 18:59:24'),
-(10, 'Nguyễn Hoàng Thy Ân', 'Hondakai2000@gmail.com', 'Đóng góp qua quét mã QR nhanh', '2025-12-28 08:11:55'),
-(11, 'Nguyễn Thị Mỹ Phương', 'thyan0358@gmail.com', 'chúc may mắn', '2025-12-28 08:25:55'),
-(12, 'Nguyễn Hoàng Thy Ân', 'myphuong.tech@gmail.com', 'vl', '2025-12-30 14:55:29'),
-(13, 'Nguyễn Hoàng Thy Ân', 'thyan0358@gmail.com', '', '2025-12-30 15:05:41'),
-(14, 'Bao Ngoc', 'myphuong.tech@gmail.com', 'this goodbye won\\\'t make me cry', '2025-12-31 01:27:29');
-
--- --------------------------------------------------------
-
+-- Chèn dữ liệu mẫu cho Dự án để làm bộ lọc cảm xúc
+INSERT INTO `lrf_projects` (`project_name`, `target_amount`, `current_amount`, `urgency_level`) VALUES
+('Học bổng Hoa Hồng Nhỏ 2026', 500000000, 120000000, 'Cao'),
+('Bữa ăn dinh dưỡng vùng cao', 100000000, 85000000, 'Khẩn cấp'),
+('Xây dựng thư viện xanh', 300000000, 10000000, 'Bình thường');
 --
 -- Cấu trúc bảng cho bảng `volunteers`
 --

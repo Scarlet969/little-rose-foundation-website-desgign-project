@@ -16,6 +16,7 @@ Template Name: Project  Art - All In One
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
          /* --- KHAI BÁO FONT GOTHAM (Bạn cần có file font trong thư mục theme) --- */
         @font-face {
@@ -294,14 +295,39 @@ Template Name: Project  Art - All In One
         .progress { height: 8px; border-radius: 50px; background-color: #eee; }
         .progress-bar { background-color: var(--primary-red); }
 
-        /* 6. FOOTER HIỆU ỨNG TRƯỢT SLIDE 12PX */
-        .social-list { list-style: none; padding: 0; }
-        .social-link-item { display: flex; align-items: center; text-decoration: none; color: #adb5bd; font-weight: 600; margin-bottom: 12px; transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); }
-        .social-icon-box { width: 35px; text-align: center; font-size: 1.2rem; margin-right: 10px; }
-        .social-link-item:hover { color: #ffffff !important; transform: translateX(12px); }
+        /* FOOTER SOCIAL LINKS */
+        .social-list { 
+            list-style: none; 
+            padding: 0; 
+        }
+        
+        .social-link-item {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #adb5bd;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon-box {
+            width: 35px;
+            text-align: center;
+            font-size: 1.2rem;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link-item:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        
         .social-link-item:hover .fa-globe { color: var(--primary-green); }
         .social-link-item:hover .fa-facebook { color: #1877F2; }
-        .social-link-item:hover .fa-tiktok { color: #ffffff; }
+        .social-link-item:hover .fa-tiktok { color: #ff0050; }
         .social-link-item:hover .fa-instagram { color: #E4405F; }
 
         .project-card h4, 
@@ -368,6 +394,167 @@ Template Name: Project  Art - All In One
 .filter-btn:hover {
     background-color: #f0f0f0;
 }
+        /* Tổng thể khối tiêu đề và lọc */
+    .lrf-filter-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 50px;
+        gap: 20px;
+    }
+
+    /* Tiêu đề 2 dòng */
+    .lrf-main-title {
+        color: #B12029 !important;
+        font-family: 'Montserrat', sans-serif !important;
+        font-weight: 800 !important;
+        line-height: 1.2 !important;
+        margin: 0 !important;
+        font-size: 2.8rem !important;
+    }
+
+    /* Khối chứa các nút bấm */
+    .lrf-filter-group {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    /* Nút bấm kiểu viên thuốc (Pill button) */
+    .btn-lrf-pill {
+        border: 2px solid #008D42 !important;
+        background-color: transparent !important;
+        color: #008D42 !important;
+        font-weight: 700 !important;
+        padding: 8px 24px !important;
+        border-radius: 50px !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 1rem !important;
+        text-decoration: none !important;
+        display: inline-block !important;
+        outline: none !important;
+    }
+
+    /* Hiệu ứng khi di chuột vào */
+    .btn-lrf-pill:hover {
+        background-color: #f0fdf4 !important; /* Xanh lá cực nhẹ */
+        transform: translateY(-2px);
+    }
+
+    /* Trạng thái khi đang được chọn (Active) */
+    .btn-lrf-pill.active {
+        background-color: #008D42 !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 12px rgba(0, 141, 66, 0.3) !important;
+    }
+
+    /* Responsive cho điện thoại */
+    @media (max-width: 768px) {
+        .lrf-filter-container {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .lrf-main-title { font-size: 2rem !important; }
+        /* Hiện menu khi hover cấp 1 */
+        .lrf-dropdown:hover > .dropdown-menu {
+            display: block;
+            margin-top: 0;
+        }
+
+        /* Hiện menu con cấp 3 khi hover (Nested Dropdown) */
+        .lrf-dropdown .dropend:hover > .dropdown-menu {
+            display: block;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            margin-left: 0;
+        }
+
+        /* Style cho Dropdown Item giống ảnh mẫu */
+        .lrf-dropdown .dropdown-menu {
+            border-radius: 10px;
+            padding: 10px 0;
+            min-width: 240px;
+            background: #ffffff;
+            animation: fadeInMenu 0.3s ease;
+        }
+
+        .lrf-dropdown .dropdown-item {
+            padding: 12px 20px;
+            color: #333 !important;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #f1f1f1; /* Đường kẻ phân cách nhẹ */
+            transition: all 0.2s ease;
+        }
+
+        .lrf-dropdown .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .lrf-dropdown .dropdown-item:hover {
+            background-color: #f8f9fa;
+            color: var(--maroon-dark) !important; /* Đổi màu khi hover */
+            padding-left: 25px; /* Hiệu ứng nhích sang phải nhẹ */
+        }
+
+        /* Hiệu ứng xuất hiện mượt */
+        @keyframes fadeInMenu {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Fix cho mobile: Vẫn cho click nếu cần */
+        @media (max-width: 991px) {
+            .lrf-dropdown .dropdown-menu { position: static; display: none; }
+            .lrf-dropdown.show .dropdown-menu { display: block; }
+        }        
+        /* --- THIẾT KẾ CARD DỰ ÁN CHUẨN ART --- */
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            border: none;
+            border-radius: 20px !important;
+            background: #fff;
+            transition: all 0.4s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
+        }
+
+        .project-card .card-body {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1; /* Đảm bảo body chiếm hết không gian còn lại */
+            padding: 1.5rem !important;
+        }
+
+        /* Câu chuyện ngắn - Ép 3 dòng để các card luôn đều nhau */
+        .project-story {
+            font-family: 'Montserrat', sans-serif !important;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #555;
+            font-style: italic;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            min-height: 4.8em; /* Độ cao cố định cho 3 dòng */
+        }
+
+        /* Thanh tiến trình */
+        .custom-progress-wrap { margin-bottom: 15px; }
+        .custom-progress-bar { transition: width 1s ease-in-out; }
+
+              
+       
         
     </style>
     <?php wp_head(); ?>
@@ -392,37 +579,67 @@ Template Name: Project  Art - All In One
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto fw-bold align-items-center">
                 <!-- Trang chủ -->
-                <li class="nav-item">
-                    <a class="nav-link <?php echo is_front_page() ? 'active text-success' : 'text-dark'; ?> px-3 fw-bold" 
-                       href="<?php echo home_url('/'); ?>" data-vi="Trang chủ" data-en="Home">Trang chủ</a>
-                </li>
-                <!-- Về chúng tôi -->
-                <li class="nav-item">
-                    <a class="nav-link <?php echo is_page('about') ? 'active text-success' : 'text-dark'; ?> px-3 fw-bold" 
-                       href="<?php echo home_url('/about/'); ?>" data-vi="Về chúng tôi" data-en="About Us">Về chúng tôi</a>
-                </li>
-                <!-- Chương trình -->
-                <li class="nav-item">
-                    <a class="nav-link <?php echo is_page('project') ? 'active text-success' : 'text-dark'; ?> px-3 fw-bold" 
-                       href="<?php echo home_url('/project/'); ?>" data-vi="Chương trình" data-en="Programs">Chương trình</a>
-                </li>
-                <!-- Thêm mục Báo cáo tài chính vào Menu -->
                     <li class="nav-item">
-                        <a class="nav-link <?php echo is_page('bao-cao') ? 'active text-success' : ''; ?> px-3 fw-bold" 
-                        href="<?php echo home_url('/bao-cao/'); ?>" 
-                        data-vi="Báo cáo tài chính" 
-                        data-en="Reports">Báo cáo tài chính</a>
+                        <a class="nav-link <?php echo is_front_page() ? 'active text-success' : ''; ?> px-3 fw-bold" 
+                           href="<?php echo home_url('/'); ?>" data-vi="Trang chủ" data-en="Home">Trang chủ</a>
                     </li>
-                <!-- Tin tức -->
-                <li class="nav-item">
-                    <a class="nav-link <?php echo is_page('news') ? 'active text-success' : 'text-dark'; ?> px-3 fw-bold" 
-                       href="<?php echo home_url('/news/'); ?>" data-vi="Tin tức" data-en="News">Tin tức</a>
-                </li>
-                <!-- Nút Đóng góp -->
-                <li class="nav-item">
-                    <a class="btn btn-donate ms-lg-4 px-4 py-2 fw-bold shadow-sm" 
-                       href="<?php echo home_url('/donate/'); ?>" data-vi="ĐÓNG GÓP" data-en="DONATE">ĐÓNG GÓP</a>
-                </li>
+                    <!-- Về chúng tôi -->
+                    <li class="nav-item dropdown lrf-dropdown">
+                        <a class="nav-link dropdown-toggle fw-bold px-3" href="<?php echo home_url('/about/'); ?>" id="aboutDropdown" role="button" data-vi="Về chúng tôi" data-en="About Us">
+                            Về chúng tôi
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="aboutDropdown">
+                            <!-- Cấp 2: Đội ngũ nhân sự (Có menu con cấp 3) -->
+                            <li class="dropend">
+                                <a class="dropdown-item d-flex justify-content-between align-items-center fw-bold" href="<?php echo home_url('/nhan-su'); ?>" data-vi="Đội ngũ nhân sự" data-en="LRF’s Board and Team">
+                                    Đội ngũ nhân sự <i class="fas fa-chevron-right ms-2" style="font-size: 0.7rem;"></i>
+                                </a>
+                                <!-- MENU CON CẤP 3 (Hiện ra khi hover vào Đội ngũ) -->
+                                <ul class="dropdown-menu shadow border-0 submenu-left">
+                                    <li><a class="dropdown-item" href="<?php echo home_url('/nhan-su/?cat=board'); ?>" data-vi="Hội đồng quản lý" data-en="Board of Directors">Hội đồng quản lý</a></li>
+                                    <li><a class="dropdown-item" href="<?php echo home_url('/nhan-su/?cat=control'); ?>" data-vi="Ban kiểm soát" data-en="Supervisory Committee">Ban kiểm soát</a></li>
+                                    <li><a class="dropdown-item" href="<?php echo home_url('/nhan-su/?cat=advisor'); ?>" data-vi="Ban cố vấn" data-en="Advisory Board">Ban cố vấn</a></li>
+                                </ul>
+                            </li>
+
+                            <!-- Các mục khác của cấp 2 -->
+                            <li><a class="dropdown-item fw-bold" href="<?php echo home_url('/tam-nhin-su-menh'); ?>" data-vi="Tầm nhìn, Sứ mệnh và Giá trị" data-en="Vision, Mission, Values">Tầm nhìn, Sứ mệnh và Giá trị</a></li>
+                            <li><a class="dropdown-item fw-bold" href="<?php echo home_url('/gia-tri-cot-loi'); ?>" data-vi="Giá trị cốt lõi" data-en="Core Commitments">Giá trị cốt lõi</a></li>
+                        </ul>
+                    </li>
+                    <!-- Chương trình -->
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo is_page('projects') ? 'active text-success' : ''; ?> px-3 fw-bold" 
+                           href="<?php echo home_url('/projects/'); ?>" data-vi="Chương trình" data-en="Programs">Chương trình</a>
+                    </li>
+                    <!-- Báo cáo tài chính -->
+                    <li class="nav-item dropdown lrf-dropdown">
+                        <a class="nav-link dropdown-toggle fw-bold px-3" href="<?php echo home_url('/bao-cao/'); ?>" id="aboutDropdown" role="button" data-vi="Báo cáo tài chính" data-en="Reports">
+                            Báo cáo tài chính
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="aboutDropdown">
+                            <!-- Cấp 2: Đội ngũ nhân sự (Có menu con cấp 3) -->
+                            <li class="dropend">
+                                <a class="dropdown-item d-flex justify-content-between align-items-center fw-bold" href="<?php echo home_url('/da-hoan-thanh'); ?>" data-vi="Dự án đã hoàn thành" data-en="Completed Projects">
+                                    Dự án đã hoàn thành <i class="fas fa-chevron-right ms-2" style="font-size: 0.7rem;"></i>
+                                </a>                                
+                            </li>
+                            <!-- Các mục khác của cấp 2 -->
+                            <li><a class="dropdown-item fw-bold" href="<?php echo home_url('/dang-trien-khai'); ?>" data-vi="Dự án đang triển khai" data-en="Active Projects">Dự án đang triển khai</a></li>
+                        </ul>
+                    </li>
+                    <!-- Tin tức -->
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo is_page('news') ? 'active text-success' : ''; ?> px-3 fw-bold" 
+                           href="<?php echo home_url('/news/'); ?>" data-vi="Tin tức" data-en="News">Tin tức</a>
+                    </li>
+                    <!-- Nút Đóng góp - ĐÃ FIX -->
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-donate px-4 py-2 shadow-sm" 
+                           href="<?php echo home_url('/donate/'); ?>" data-vi="ĐÓNG GÓP" data-en="DONATE">
+                            ĐÓNG GÓP
+                        </a>
+                    </li>
                 
                 <!-- Chuyển ngôn ngữ -->
                 <li class="nav-item d-flex ms-lg-4 fw-bold">
@@ -438,119 +655,136 @@ Template Name: Project  Art - All In One
     <div class="container my-5 py-5">
         <!-- Tiêu đề và Bộ lọc (Filter) -->
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-5">
-            <h2 class="fw-bold display-6" style="font-family: 'Gotham', sans-serif;" data-vi="Các Chương Trình & Dự Án" data-en="Programs & Projects">Các Chương Trình & Dự Án</h2>
-            <div class="mt-3 mt-md-0 text-center">
-                <button class="filter-btn active" data-filter="all" data-vi="Tất cả" data-en="All" style="color: black;">Tất cả</button>
-                <button class="filter-btn" data-filter="edu" data-vi="Giáo dục" data-en="Education" style="color: black;">Giáo dục</button>
-                <button class="filter-btn" data-filter="health" data-vi="Y tế" data-en="Health" style="color: black;">Y tế</button>
-                <button class="filter-btn" data-filter="social" data-vi="Xã hội" data-en="Social" style="color: black;">Xã hội</button>
-            </div>
-        </div>
+    <h2 class="fw-bold display-5 mb-3 mb-md-0" style="color: #B12029; font-family: 'Montserrat', sans-serif;">
+        Các Chương Trình <br>& Dự Án
+    </h2>
+    
+    <div id="project-filters" class="d-flex gap-2 flex-wrap">
+        <button class="btn btn-filter-lrf active" data-filter="all" data-vi="Tất cả" data-en="All">Tất cả</button>
+        <button class="btn btn-filter-lrf" data-filter="edu" data-vi="Giáo dục" data-en="Education">Giáo dục</button>
+        <button class="btn btn-filter-lrf" data-filter="health" data-vi="Y tế" data-en="Health">Y tế</button>
+        <button class="btn btn-filter-lrf" data-filter="social" data-vi="Xã hội" data-en="Social">Xã hội</button>
+    </div>
+</div>
 
         <!-- DANH SÁCH DỰ ÁN -->
         <div class="row g-4" id="project-list">
-            
-            <!-- Dự án 1: Xã hội -->
-            <div class="col-lg-4 col-md-6 project-item" data-category="social">
-                <div class="project-card h-100 shadow-sm border-0">
-                    <div class="project-img-container" style="position: relative; height: 260px; overflow: hidden; border-radius: 20px 20px 0 0;">
-                        <img src="http://localhost/little-rose-web/wp-content/uploads/2025/12/xahoi1.jpg" class="w-100 h-100" style="object-fit: cover;" alt="Social">
-                        <span class="category-badge-apple" data-vi="Xã hội" data-en="Social">Xã hội</span>
+    <!-- DỰ ÁN 1: XÃ HỘI -->
+    <div class="col-lg-4 col-md-6 project-item" data-category="social">
+        <div class="project-card h-100 shadow-sm border-0">
+            <div class="project-img-container" style="height: 240px;">
+                <img src="https://petal-three-lrf.infinityfreeapp.com/wp-content/uploads/2025/12/xahoi1.jpg" class="w-100 h-100">
+                <span class="category-badge-apple" data-vi="Xã hội" data-en="Social">Xã hội</span>
+            </div>
+            <div class="card-body">
+                <h4 class="text-center mb-3" data-vi="Hỗ trợ người yếu thế" data-en="Supporting the Vulnerable">Hỗ trợ người yếu thế</h4>
+                <p class="project-story text-center" data-vi="“Nhờ chiếc xe nước mía của quỹ, tôi đã có thể tự nuôi bản thân và lo cho đứa cháu đi học” - Bà Sáu chia sẻ đầy xúc động." data-en="“Thanks to the fund's support, I can now support myself and my grandchild's education.”">“Nhờ chiếc xe nước mía của quỹ, tôi đã có thể tự nuôi bản thân và lo cho đứa cháu đi học” - Bà Sáu chia sẻ đầy xúc động.</p>
+                
+                <div class="custom-progress-wrap">
+                    <div class="custom-progress" style="height: 6px; background: #eee; border-radius: 10px;">
+                        <div class="custom-progress-bar" style="width: 25%; height: 100%; background: var(--primary-red); border-radius: 10px;"></div>
                     </div>
-                    <div class="card-body p-4 text-center">
-                        <h4 class="project-title" style="font-family: 'Montserrat', sans-serif; font-weight: 800;" data-vi="Hỗ trợ người yếu thế" data-en="Supporting the Vulnerable">Hỗ trợ người yếu thế</h4>
-                        <p class="project-desc small text-muted mb-4" data-vi="Trợ giúp vốn, phương tiện mưu sinh, dụng cụ hỗ trợ và đào tạo nghề." data-en="Providing capital, livelihood tools, and vocational training.">Trợ giúp vốn, phương tiện mưu sinh, dụng cụ hỗ trợ và đào tạo nghề.</p>
-                        
-                        <div class="custom-progress-wrap">
-                            <div class="custom-progress" style="height: 5px; background: #eee; border-radius: 10px;">
-                                <div class="custom-progress-bar" style="width: 25%; height: 100%; background: var(--primary-red); border-radius: 10px;"></div>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between small fw-bold mb-4 mt-2">
-                            <span class="text-danger">25%</span>
-                            <span class="text-muted">Goal: 1 tỷ</span>
-                        </div>
-                        <a href="<?php echo home_url('/donate/'); ?>" class="btn btn-donate w-100"data-vi="ỦNG HỘ NGAY" data-en="DONATE NOW">ỦNG HỘ NGAY</a>
+                    <div class="d-flex justify-content-between small fw-bold mt-2">
+                        <span class="text-danger">25%</span>
+                        <span class="text-muted">Goal: 1 tỷ</span>
                     </div>
                 </div>
-            </div>
 
-            <!-- Dự án 2: Giáo dục -->
-            <div class="col-lg-4 col-md-6 project-item" data-category="edu">
-                <div class="project-card h-100 shadow-sm border-0">
-                    <div class="project-img-container" style="position: relative; height: 260px; overflow: hidden; border-radius: 20px 20px 0 0;">
-                        <img src="http://localhost/little-rose-web/wp-content/uploads/2025/12/chuongtrinh1.jpg" class="w-100 h-100" style="object-fit: cover;" alt="Education">
-                        <span class="category-badge-apple" data-vi="Giáo dục" data-en="Education">Giáo dục</span>
-                    </div>
-                    <div class="card-body p-4 text-center">
-                        <h4 class="project-title" style="font-family: 'Montserrat', sans-serif; font-weight: 800;" data-vi="Học bổng Bông Hồng Nhỏ" data-en="Little Roses Scholarship">Học bổng Bông Hồng Nhỏ</h4>
-                        <p class="project-desc small text-muted mb-4" data-vi="Trao tặng cơ hội học tập cho những học sinh, sinh viên nghèo mồ côi, hiếu học." data-en="Providing educational opportunities for poor, orphaned, and studious students.">Trao tặng cơ hội học tập cho những học sinh hiếu học.</p>
-                        
-                        <div class="custom-progress-wrap">
-                            <div class="custom-progress" style="height: 5px; background: #eee; border-radius: 10px;">
-                                <div class="custom-progress-bar" style="width: 85%; height: 100%; background: var(--primary-red); border-radius: 10px;"></div>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between small fw-bold mb-4 mt-2">
-                            <span class="text-danger">85%</span>
-                            <span class="text-muted">Goal: 2 tỷ</span>
-                        </div>
-                        <a href="<?php echo home_url('/donate/'); ?>" class="btn btn-donate w-100" data-vi="ỦNG HỘ NGAY" data-en="DONATE NOW">ỦNG HỘ NGAY</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Dự án 3: Y tế học đường -->
-            <div class="col-lg-4 col-md-6 project-item" data-category="health">
-                <div class="project-card h-100 shadow-sm border-0">
-                    <div class="project-img-container" style="position: relative; height: 260px; overflow: hidden; border-radius: 20px 20px 0 0;">
-                        <img src="http://localhost/little-rose-web/wp-content/uploads/2025/12/yte.jpg" class="w-100 h-100" style="object-fit: cover;" alt="Health">
-                        <span class="category-badge-apple" data-vi="Y tế" data-en="Health">Y tế</span>
-                    </div>
-                    <div class="card-body p-4 text-center">
-                        <h4 class="project-title" style="font-family: 'Montserrat', sans-serif; font-weight: 800;" data-vi="Sức khỏe học đường" data-en="School Health">Sức khỏe học đường</h4>
-                        <p class="project-desc small text-muted mb-4" data-vi="Phối hợp khám tổng quát, phát thuốc và tặng quà cho trẻ em mồ côi." data-en="General check-ups and providing medicine for orphaned children.">Phối hợp khám tổng quát, phát thuốc cho trẻ em mồ côi.</p>
-                        
-                        <div class="custom-progress-wrap">
-                            <div class="custom-progress" style="height: 5px; background: #eee; border-radius: 10px;">
-                                <div class="custom-progress-bar" style="width: 50%; height: 100%; background: var(--primary-red); border-radius: 10px;"></div>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between small fw-bold mb-4 mt-2">
-                            <span class="text-danger">50%</span>
-                            <span class="text-muted">Goal: 2 tỷ</span>
-                        </div>
-                        <a href="<?php echo home_url('/donate/'); ?>" class="btn btn-donate w-100" data-vi="ỦNG HỘ NGAY" data-en="DONATE NOW">ỦNG HỘ NGAY</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Dự án 4: Y tế phòng ngừa -->
-            <div class="col-lg-4 col-md-6 project-item" data-category="health">
-                <div class="project-card h-100 shadow-sm border-0">
-                    <div class="project-img-container" style="position: relative; height: 260px; overflow: hidden; border-radius: 20px 20px 0 0;">
-                        <img src="http://localhost/little-rose-web/wp-content/uploads/2025/12/yte2.jpg" class="w-100 h-100" style="object-fit: cover;" alt="Prevention">
-                        <span class="category-badge-apple" data-vi="Y tế" data-en="Health">Y tế</span>
-                    </div>
-                    <div class="card-body p-4 text-center">
-                        <h4 class="project-title" style="font-family: 'Montserrat', sans-serif; font-weight: 800;" data-vi="Phòng ngừa bệnh tật" data-en="Disease Prevention">Phòng ngừa bệnh tật</h4>
-                        <p class="project-desc small text-muted mb-4" data-vi="Hợp tác triển khai các chương trình nâng cao nhận thức và phòng ngừa bệnh." data-en="Cooperating in awareness programs to prevent and reduce diseases.">Hợp tác triển khai nâng cao nhận thức phòng ngừa bệnh.</p>
-                        
-                        <div class="custom-progress-wrap">
-                            <div class="custom-progress" style="height: 5px; background: #eee; border-radius: 10px;">
-                                <div class="custom-progress-bar" style="width: 20%; height: 100%; background: var(--primary-red); border-radius: 10px;"></div>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between small fw-bold mb-4 mt-2">
-                            <span class="text-danger">20%</span>
-                            <span class="text-muted">Goal: 2 tỷ</span>
-                        </div>
-                        <a href="<?php echo home_url('/donate/'); ?>" class="btn btn-donate w-100" data-vi="ỦNG HỘ NGAY" data-en="DONATE NOW">ỦNG HỘ NGAY</a>
-                    </div>
+                <div class="project-actions">
+                    <a href="<?php echo home_url('/bao-cao/dang-trien-khai'); ?>" class="btn-report-link" data-vi="XEM BÁO CÁO" data-en="VIEW REPORT">XEM BÁO CÁO</a>
+                    <a href="<?php echo home_url('/donate/'); ?>" class="btn-donate-card" data-vi="ỦNG HỘ" data-en="DONATE">ỦNG HỘ</a>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- DỰ ÁN 2: GIÁO DỤC -->
+    <div class="col-lg-4 col-md-6 project-item" data-category="edu">
+        <div class="project-card h-100 shadow-sm border-0">
+            <div class="project-img-container" style="height: 240px;">
+                <img src="https://petal-three-lrf.infinityfreeapp.com/wp-content/uploads/2025/12/chuongtrinh1.jpg" class="w-100 h-100">
+                <span class="category-badge-apple" data-vi="Giáo dục" data-en="Education">Giáo dục</span>
+            </div>
+            <div class="card-body">
+                <h4 class="text-center mb-3" data-vi="Học bổng Bông Hồng Nhỏ" data-en="Little Roses Scholarship">Học bổng Bông Hồng Nhỏ</h4>
+                <p class="project-story text-center" data-vi="Em Nam mồ côi cha từ nhỏ, nhờ học bổng em đã không phải bỏ học giữa chừng và hiện đang là sinh viên sư phạm." data-en="Nam, an orphan, continued his education thanks to the scholarship and is now a pedagogy student.">Em Nam mồ côi cha từ nhỏ, nhờ học bổng em đã không phải bỏ học giữa chừng và hiện đang là sinh viên sư phạm.</p>
+                
+                <div class="custom-progress-wrap">
+                    <div class="custom-progress" style="height: 6px; background: #eee; border-radius: 10px;">
+                        <div class="custom-progress-bar" style="width: 85%; height: 100%; background: var(--primary-red); border-radius: 10px;"></div>
+                    </div>
+                    <div class="d-flex justify-content-between small fw-bold mt-2">
+                        <span class="text-danger">85%</span>
+                        <span class="text-muted">Goal: 2 tỷ</span>
+                    </div>
+                </div>
+
+                <div class="project-actions">
+                    <a href="<?php echo home_url('/bao-cao/dang-trien-khai'); ?>" class="btn-report-link" data-vi="XEM BÁO CÁO" data-en="VIEW REPORT">XEM BÁO CÁO</a>
+                    <a href="<?php echo home_url('/donate/'); ?>" class="btn-donate-card" data-vi="ỦNG HỘ" data-en="DONATE">ỦNG HỘ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DỰ ÁN 3: Y TẾ HỌC ĐƯỜNG -->
+    <div class="col-lg-4 col-md-6 project-item" data-category="health">
+        <div class="project-card h-100 shadow-sm border-0">
+            <div class="project-img-container" style="height: 240px;">
+                <img src="https://petal-three-lrf.infinityfreeapp.com/wp-content/uploads/2025/12/yte.jpg" class="w-100 h-100">
+                <span class="category-badge-apple" data-vi="Y tế" data-en="Health">Y tế</span>
+            </div>
+            <div class="card-body">
+                <h4 class="text-center mb-3" data-vi="Sức khỏe học đường" data-en="School Health">Sức khỏe học đường</h4>
+                <p class="project-story text-center" data-vi="“Con không còn sợ bác sĩ nữa vì các cô chú rất hiền.” - Em Lan (9 tuổi) cười rạng rỡ sau khi được khám tổng quát." data-en="“I’m not afraid of doctors anymore because they are so kind.” - Lan (9 years old) smiled after her check-up.">“Con không còn sợ bác sĩ nữa vì các cô chú rất hiền.” - Em Lan (9 tuổi) cười rạng rỡ sau khi được khám tổng quát.</p>
+                
+                <div class="custom-progress-wrap">
+                    <div class="custom-progress" style="height: 6px; background: #eee; border-radius: 10px;">
+                        <div class="custom-progress-bar" style="width: 50%; height: 100%; background: var(--primary-red); border-radius: 10px;"></div>
+                    </div>
+                    <div class="d-flex justify-content-between small fw-bold mt-2">
+                        <span class="text-danger">50%</span>
+                        <span class="text-muted">Goal: 2 tỷ</span>
+                    </div>
+                </div>
+
+                <div class="project-actions">
+                    <a href="<?php echo home_url('/bao-cao/dang-trien-khai'); ?>" class="btn-report-link" data-vi="XEM BÁO CÁO" data-en="VIEW REPORT">XEM BÁO CÁO</a>
+                    <a href="<?php echo home_url('/donate/'); ?>" class="btn-donate-card" data-vi="ỦNG HỘ" data-en="DONATE">ỦNG HỘ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DỰ ÁN 4: Y TẾ PHÒNG NGỪA -->
+    <div class="col-lg-4 col-md-6 project-item" data-category="health">
+        <div class="project-card h-100 shadow-sm border-0">
+            <div class="project-img-container" style="height: 240px;">
+                <img src="https://petal-three-lrf.infinityfreeapp.com//wp-content/uploads/2025/12/yte2.jpg" class="w-100 h-100">
+                <span class="category-badge-apple" data-vi="Y tế" data-en="Health">Y tế</span>
+            </div>
+            <div class="card-body">
+                <h4 class="text-center mb-3" data-vi="Phòng ngừa bệnh tật" data-en="Disease Prevention">Phòng ngừa bệnh tật</h4>
+                <p class="project-story text-center" data-vi="Những buổi hướng dẫn rửa tay sạch đã giúp giảm 40% tỷ lệ mắc bệnh truyền nhiễm tại các điểm trường vùng xa." data-en="Handwashing workshops helped reduce infectious disease rates by 40% in remote schools.">Những buổi hướng dẫn rửa tay sạch đã giúp giảm 40% tỷ lệ mắc bệnh truyền nhiễm tại các điểm trường vùng xa.</p>
+                
+                <div class="custom-progress-wrap">
+                    <div class="custom-progress" style="height: 6px; background: #eee; border-radius: 10px;">
+                        <div class="custom-progress-bar" style="width: 20%; height: 100%; background: var(--primary-red); border-radius: 10px;"></div>
+                    </div>
+                    <div class="d-flex justify-content-between small fw-bold mt-2">
+                        <span class="text-danger">20%</span>
+                        <span class="text-muted">Goal: 2 tỷ</span>
+                    </div>
+                </div>
+
+                <div class="project-actions">
+                    <a href="<?php echo home_url('/bao-cao/dang-trien-khai'); ?>" class="btn-report-link" data-vi="XEM BÁO CÁO" data-en="VIEW REPORT">XEM BÁO CÁO</a>
+                    <a href="<?php echo home_url('/donate/'); ?>" class="btn-donate-card" data-vi="ỦNG HỘ" data-en="DONATE">ỦNG HỘ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </main>
 
 
@@ -579,41 +813,59 @@ Template Name: Project  Art - All In One
                 </div>
             </div>
             <hr class="border-secondary mt-5">
-         <p class="text-center small text-secondary">© <?php echo date("Y"); ?> Little Rose Foundation - Developed by Petal Three</p>
+            <p class="text-center small text-secondary">© <?php echo date("Y"); ?> Little Rose Foundation - Developed by Petal Three</p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // 1. Hàm lọc nội dung (Phải để ngoài cùng để gọi được ở mọi nơi)
+        function applyFilter(category) {
+            // Cập nhật nút active
+            document.querySelectorAll('.btn-filter-lrf').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-filter') === category);
+            });
+
+            // Ẩn hiện card
+            document.querySelectorAll('.project-item').forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // 2. Hàm ngôn ngữ
         function changeLang(lang) {
-            document.querySelectorAll('[data-vi]').forEach(el => { el.innerText = el.getAttribute('data-' + lang); });
+            document.querySelectorAll('[data-vi]').forEach(el => {
+                el.innerText = el.getAttribute('data-' + lang);
+            });
             document.getElementById('btn-vi').classList.toggle('active', lang === 'vi');
             document.getElementById('btn-en').classList.toggle('active', lang === 'en');
         }
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const projectItems = document.querySelectorAll('.project-item');
 
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelector('.filter-btn.active').classList.remove('active');
-                btn.classList.add('active');
-                const filter = btn.getAttribute('data-filter');
-                projectItems.forEach(item => {
-                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                        item.style.display = 'block';
-                        setTimeout(() => { item.style.opacity = '1'; }, 10);
-                    } else {
-                        item.style.opacity = '0';
-                        setTimeout(() => { item.style.display = 'none'; }, 400);
-                    }
+        // 3. Khởi tạo khi trang sẵn sàng
+        document.addEventListener('DOMContentLoaded', () => {
+            // Sự kiện nút lọc
+            document.querySelectorAll('.btn-filter-lrf').forEach(button => {
+                button.addEventListener('click', function() {
+                    applyFilter(this.getAttribute('data-filter'));
                 });
             });
+
+            // Kiểm tra filter từ URL (?filter=edu)
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('filter')) applyFilter(urlParams.get('filter'));
         });
-        window.addEventListener('load', function() {
-            setTimeout(() => {
-                const preloader = document.getElementById('preloader');
-                if(preloader) { preloader.style.opacity = '0'; setTimeout(() => { preloader.style.display = 'none'; }, 800); }
-            }, 1200);
+
+        // 4. Tắt màn hình loading khi trang tải xong hoàn toàn
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            if(preloader) {
+                preloader.style.opacity = '0';
+                setTimeout(() => { preloader.style.display = 'none'; }, 500);
+            }
         });
     </script>
     <?php wp_footer(); ?>

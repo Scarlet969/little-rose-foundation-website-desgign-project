@@ -479,3 +479,60 @@ h1, h2, h3, h4, .serif {
     opacity: 1 !important;
     transform: scale(1.05) !important;
 }
+/* Style cho các nút lọc chuyên nghiệp */
+.btn-filter {
+    border: 1.5px solid #008D42;
+    background: transparent;
+    color: #008D42;
+    font-weight: 700;
+    padding: 10px 25px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    text-transform: none;
+}
+
+.btn-filter:hover, .btn-filter.active {
+    background-color: #008D42 !important;
+    color: #ffffff !important;
+    border-color: #008D42;
+    box-shadow: 0 4px 15px rgba(0, 141, 66, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Fix tiêu đề trên mobile */
+@media (max-width: 768px) {
+    .align-items-end {
+        align-items: flex-start !important; /* Trên mobile thì căn lề trái hết */
+    }
+}
+/* Giao diện nút bấm cao cấp cho LRF */
+.btn-filter-lrf {
+    border: 2px solid #008D42 !important;
+    background-color: transparent !important;
+    color: #008D42 !important;
+    font-weight: 700 !important;
+    padding: 10px 25px !important;
+    border-radius: 50px !important; /* Bo tròn kiểu viên thuốc nhìn nhân ái hơn */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    font-family: 'Montserrat', sans-serif !important;
+    text-transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Hiệu ứng khi Di chuột vào (Hover) */
+.btn-filter-lrf:hover {
+    background-color: #e8f5ed !important; /* Xanh cực nhẹ */
+    transform: translateY(-2px);
+}
+
+/* Hiệu ứng khi Nút đang được chọn (Active) */
+.btn-filter-lrf.active {
+    background-color: #008D42 !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 15px rgba(0, 141, 66, 0.3) !important;
+}
+
+/* Căn chỉnh khoảng cách cho tiêu đề có 2 dòng */
+h2.fw-bold {
+    line-height: 1.2;
+}

@@ -531,41 +531,199 @@ Template Name: Donate Page - Art Final
             height: 3rem;
         }
         /* --- FIX LỖI TRÀN CHỮ VNĐ --- */
-.custom-amount {
-    position: relative; /* Làm gốc cho chữ VNĐ bám vào */
-    display: flex;
-    align-items: center;
-}
+        .custom-amount {
+            position: relative; /* Làm gốc cho chữ VNĐ bám vào */
+            display: flex;
+            align-items: center;
+        }
 
-.currency-symbol {
-    position: absolute;
-    left: 15px; /* Khoảng cách từ lề trái */
-    font-weight: 800;
-    color: var(--primary-green);
-    z-index: 5;
-    pointer-events: none; /* Để người dùng click xuyên qua chữ vào ô nhập được */
-}
+        .currency-symbol {
+            position: absolute;
+            left: 15px; /* Khoảng cách từ lề trái */
+            font-weight: 800;
+            color: var(--primary-green);
+            z-index: 5;
+            pointer-events: none; /* Để người dùng click xuyên qua chữ vào ô nhập được */
+        }
 
-#customAmount {
-    padding-left: 65px !important; /* Đẩy chữ placeholder ra sau chữ VNĐ */
-    height: 55px;
-    border-radius: 12px;
-    font-weight: 700;
-    border: 2px solid #eee;
-    transition: all 0.3s ease;
-}
+        #customAmount {
+            padding-left: 65px !important; /* Đẩy chữ placeholder ra sau chữ VNĐ */
+            height: 55px;
+            border-radius: 12px;
+            font-weight: 700;
+            border: 2px solid #eee;
+            transition: all 0.3s ease;
+        }
 
-#customAmount:focus {
-    border-color: var(--primary-green);
-    box-shadow: 0 0 0 4px rgba(0, 141, 66, 0.1);
-}
+        #customAmount:focus {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 4px rgba(0, 141, 66, 0.1);
+        }
 
-/* Ẩn mũi tên tăng giảm mặc định của input number cho đẹp */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
+        /* Ẩn mũi tên tăng giảm mặc định của input number cho đẹp */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        /* Tên người đóng góp sạch sẽ, không avatar */
+        .donor-name-clean {
+            font-weight: 700 !important;
+            color: #333 !important;
+            font-size: 1rem !important;
+            white-space: nowrap !important; /* Tuyệt chiêu: Ép tên nằm trên 1 hàng duy nhất */
+            display: inline-block !important;
+        }
+
+        /* Căn chỉnh lại bảng cho thoáng */
+        .table td {
+            padding: 18px 10px !important; /* Tăng độ cao hàng để nhìn sang hơn */
+            vertical-align: middle !important;
+        }
+
+        /* Badge số tiền nhìn tinh tế hơn */
+        .amount-badge {
+            background: rgba(227, 6, 19, 0.05) !important;
+            color: #E30613 !important;
+            padding: 6px 16px !important;
+            border-radius: 50px !important;
+            font-weight: 800 !important;
+            font-size: 1.05rem !important;
+            border: 1px solid rgba(227, 6, 19, 0.1) !important;
+            display: inline-block !important;
+        }
+        /* Hiệu ứng mờ dần và hiện lên cho thông báo thành công */
+        .success-card {
+            animation: fadeIn 0.8s ease forwards;
+            text-align: center;
+            padding: 20px 10px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Thẻ biên lai Startup ngay trong Form */
+        .inner-receipt {
+            background: #f8fdfa;
+            border: 1px dashed #008D42;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .receipt-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .receipt-item b { color: #333; }
+        .receipt-item .amt { color: #E30613; font-weight: 800; }
+
+        .heart-beat {
+            font-size: 50px;
+            color: #E30613;
+            animation: beat 1.2s infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        /* Hiệu ứng cánh hoa hồng rơi cục bộ */
+        .petal-local {
+            position: fixed; top: -10%; z-index: 9999;
+            pointer-events: none; user-select: none;
+        }
+       /* --- FIX DROPDOWN HOVER TRANG CHỦ --- */
+
+        /* Hiển thị menu cấp 2 khi di chuột vào "Về chúng tôi" */
+        .lrf-dropdown:hover > .dropdown-menu {
+            display: block !important;
+            margin-top: 0; /* Xóa khoảng trống để không bị mất hover khi di chuột xuống */
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Hiển thị menu cấp 3 (Đội ngũ nhân sự) khi di chuột vào */
+        .lrf-dropdown .dropend:hover > .dropdown-menu {
+            display: block !important;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            margin-left: 0;
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Style cho các hộp menu dropdown */
+        .lrf-dropdown .dropdown-menu {
+            border-radius: 12px;
+            padding: 10px 0;
+            min-width: 250px;
+            background: #ffffff;
+            border: none !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
+            animation: fadeInMenu 0.3s ease;
+        }
+
+        /* Căn chỉnh các item trong menu */
+        .lrf-dropdown .dropdown-item {
+            padding: 12px 20px;
+            color: #333 !important;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600 !important;
+            border-bottom: 1px solid #f8f9fa;
+            transition: all 0.2s ease;
+        }
+
+        .lrf-dropdown .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .lrf-dropdown .dropdown-item:hover {
+            background-color: #f1f8f4; /* Màu xanh lá cực nhẹ */
+            color: var(--primary-green) !important;
+            padding-left: 28px; /* Hiệu ứng nhích sang phải */
+        }
+
+        /* Đảm bảo mũi tên icon ở menu cấp 2 luôn nằm bên phải */
+        .lrf-dropdown .dropend .fa-chevron-right {
+            font-size: 0.75rem;
+            color: #999;
+        }
+
+        /* Hiệu ứng xuất hiện */
+        @keyframes fadeInMenu {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Đảm bảo Navbar luôn nằm trên cùng của Hero và Cánh hoa */
+        nav.navbar {
+            z-index: 2000 !important;
+        }
+
+        /* Fix lỗi trên mobile: không hover được thì dùng click */
+        @media (max-width: 991px) {
+            .lrf-dropdown .dropdown-menu { 
+                position: static !important; 
+                display: none; 
+                box-shadow: none !important;
+                border-left: 3px solid var(--primary-green) !important;
+                margin-left: 15px;
+            }
+            .lrf-dropdown.show > .dropdown-menu { 
+                display: block !important; 
+            }
+        }
     </style>
     <?php wp_head(); ?>
 </head>
@@ -584,13 +742,46 @@ input::-webkit-inner-spin-button {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item"><a class="nav-link px-3" href="<?php echo home_url('/'); ?>" data-vi="Trang chủ" data-en="Home">Trang chủ</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="<?php echo home_url('/about/'); ?>" data-vi="Về chúng tôi" data-en="About Us">Về chúng tôi</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="<?php echo home_url('/project/'); ?>" data-vi="Chương trình" data-en="Programs">Chương trình</a></li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo is_page('bao-cao') ? 'active text-success' : ''; ?> px-3" 
-                           href="<?php echo home_url('/bao-cao/'); ?>" 
-                           data-vi="Báo cáo" 
-                           data-en="Reports">Báo cáo tài chính</a>
+                    <!-- Về chúng tôi -->
+                    <li class="nav-item dropdown lrf-dropdown">
+                        <a class="nav-link dropdown-toggle fw-bold px-3" href="<?php echo home_url('/about/'); ?>" id="aboutDropdown" role="button" data-vi="Về chúng tôi" data-en="About Us">
+                            Về chúng tôi
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="aboutDropdown">
+                            <!-- Cấp 2: Đội ngũ nhân sự (Có menu con cấp 3) -->
+                            <li class="dropend">
+                                <a class="dropdown-item d-flex justify-content-between align-items-center fw-bold" href="<?php echo home_url('/nhan-su'); ?>" data-vi="Đội ngũ nhân sự" data-en="LRF’s Board and Team">
+                                    Đội ngũ nhân sự <i class="fas fa-chevron-right ms-2" style="font-size: 0.7rem;"></i>
+                                </a>
+                                <!-- MENU CON CẤP 3 (Hiện ra khi hover vào Đội ngũ) -->
+                                <ul class="dropdown-menu shadow border-0 submenu-left">
+                                    <li><a class="dropdown-item" href="<?php echo home_url('/nhan-su/?cat=board'); ?>" data-vi="Hội đồng quản lý" data-en="Board of Directors">Hội đồng quản lý</a></li>
+                                    <li><a class="dropdown-item" href="<?php echo home_url('/nhan-su/?cat=control'); ?>" data-vi="Ban kiểm soát" data-en="Supervisory Committee">Ban kiểm soát</a></li>
+                                    <li><a class="dropdown-item" href="<?php echo home_url('/nhan-su/?cat=advisor'); ?>" data-vi="Ban cố vấn" data-en="Advisory Board">Ban cố vấn</a></li>
+                                </ul>
+                            </li>
+
+                            <!-- Các mục khác của cấp 2 -->
+                            <li><a class="dropdown-item fw-bold" href="<?php echo home_url('/tam-nhin-su-menh'); ?>" data-vi="Tầm nhìn, Sứ mệnh và Giá trị" data-en="Vision, Mission, Values">Tầm nhìn, Sứ mệnh và Giá trị</a></li>
+                            <li><a class="dropdown-item fw-bold" href="<?php echo home_url('/gia-tri-cot-loi'); ?>" data-vi="Giá trị cốt lõi" data-en="Core Commitments">Giá trị cốt lõi</a></li>
+                        </ul>
+                    </li>
+                    <!-- Báo cáo tài chính -->
+                    <li class="nav-item"><a class="nav-link px-3" href="<?php echo home_url('/projects/'); ?>" data-vi="Chương trình" data-en="Programs">Chương trình</a></li>
+                    <li class="nav-item dropdown lrf-dropdown">
+                        <a class="nav-link dropdown-toggle fw-bold px-3" href="<?php echo home_url('/bao-cao/'); ?>" id="aboutDropdown" role="button" data-vi="Báo cáo tài chính" data-en="Reports">
+                            Báo cáo tài chính
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="aboutDropdown">
+                            <!-- Cấp 2: Đội ngũ nhân sự (Có menu con cấp 3) -->
+                            <li class="dropend">
+                                <a class="dropdown-item d-flex justify-content-between align-items-center fw-bold" href="<?php echo home_url('/da-hoan-thanh'); ?>" data-vi="Dự án đã hoàn thành" data-en="Completed Projects">
+                                    Dự án đã hoàn thành <i class="fas fa-chevron-right ms-2" style="font-size: 0.7rem;"></i>
+                                </a>                                
+                            </li>
+                            <!-- Các mục khác của cấp 2 -->
+                            <li><a class="dropdown-item fw-bold" href="<?php echo home_url('/dang-trien-khai'); ?>" data-vi="Dự án đang triển khai" data-en="Active Projects">Dự án đang triển khai</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link px-3" href="<?php echo home_url('/news/'); ?>" data-vi="Tin tức" data-en="News">Tin tức</a></li>                  
                     <li class="nav-item"><a class="btn btn-donate ms-lg-4 shadow-sm" href="<?php echo home_url('/donate/'); ?>" data-vi="ĐÓNG GÓP" data-en="DONATE">ĐÓNG GÓP</a></li>
@@ -653,8 +844,8 @@ input::-webkit-inner-spin-button {
                                             Tài khoản thụ hưởng
                                         </span>
                                         <div class="d-flex justify-content-between align-items-center">
-                                            <span class="bank-value">Quỹ Tứ Thiện Bông Hồng Nhỏ</span>
-                                            <button class="copy-btn" onclick="copyToClipboard('Quỹ Tứ Thiện Bông Hồng Nhỏ', this)">
+                                            <span class="bank-value">Quỹ Từ Thiện Bông Hồng Nhỏ</span>
+                                            <button class="copy-btn" onclick="copyToClipboard('Quỹ Từ Thiện Bông Hồng Nhỏ', this)">
                                                 <i class="far fa-copy"></i> Copy
                                             </button>
                                         </div>
@@ -722,22 +913,7 @@ input::-webkit-inner-spin-button {
             </div>
         </div>
 
-        <!-- TỔNG SỐ TIỀN & QUOTE -->
-        <div class="row justify-content-center mb-5">
-            <div class="col-lg-8">
-                <div class="text-center">
-                    <h2 class="fw-bold mb-4" data-vi="TỔNG SỐ TIỀN" data-en="TOTAL AMOUNT">TỔNG SỐ TIỀN</h2>
-                    <div class="quote-box">
-                        <p class="quote-text" 
-                           data-vi="Một lời nói hay một nụ cười thường cũng đủ để đưa sự sống tươi mát vào trong một tâm hồn thất vọng." 
-                           data-en="A kind word or a smile is often enough to bring fresh life into a discouraged soul.">
-                            "Một lời nói hay một nụ cười thường cũng đủ để đưa sự sống tươi mát vào trong một tâm hồn thất vọng."
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        
         <!-- FORM XÁC NHẬN ĐÓNG GÓP -->
         <div class="row justify-content-center">
             <div class="col-lg-8">
@@ -747,7 +923,21 @@ input::-webkit-inner-spin-button {
                     </h3>
                     
                     <!-- Form sẽ gửi đến process_donate.php -->
-                    <form id="donationForm" action="<?php echo get_template_directory_uri(); ?>/process_donate.php" method="POST">
+                    <form id="donationForm">
+                        <!-- Lựa chọn chương trình -->
+                        <div class="form-group">
+                            <label for="program_name" class="form-label" data-vi="Chương trình đóng góp *" data-en="Target Program *">
+                                Chương trình đóng góp *
+                            </label>
+                            <select class="form-select" id="program_name" name="program_name" required>
+                                <option value="" data-vi="-- Chọn chương trình --" data-en="-- Select a program --">-- Chọn chương trình --</option>
+                                <option value="Hỗ trợ người yếu thế" data-vi="Hỗ trợ người yếu thế" data-en="Supporting the Vulnerable">Hỗ trợ người yếu thế</option>
+                                <option value="Học bổng Bông Hồng Nhỏ" data-vi="Học bổng Bông Hồng Nhỏ" data-en="Little Roses Scholarship">Học bổng Bông Hồng Nhỏ</option>
+                                <option value="Sức khỏe học đường" data-vi="Sức khỏe học đường" data-en="School Health">Sức khỏe học đường</option>
+                                <option value="Phòng ngừa bệnh tật" data-vi="Phòng ngừa bệnh tật" data-en="Disease Prevention">Phòng ngừa bệnh tật</option>
+                                <option value="Quỹ chung" data-vi="Đóng góp vào quỹ chung" data-en="General Fund">Đóng góp vào quỹ chung</option>
+                            </select>
+                        </div>
                         <!-- Họ và tên -->
                         <div class="form-group">
                             <label for="fullname" class="form-label" data-vi="Họ và tên *" data-en="Full Name *">
@@ -847,35 +1037,8 @@ input::-webkit-inner-spin-button {
                         </button>
                     </form>
                     
-                    <!-- Loading spinner -->
-                    <div id="loadingSpinner" class="text-center mt-3" style="display: none;">
-                        <div class="spinner-border text-success" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                        <p class="mt-2" data-vi="Đang xử lý..." data-en="Processing...">Đang xử lý...</p>
-                    </div>
-                </div>
-            </div>
-        </div> 
-        <div class="donor-table-wrap mt-5">
-    <h3 class="table-title" data-vi="DANH SÁCH ĐÓNG GÓP GẦN ĐÂY" data-en="RECENT DONATIONS">DANH SÁCH ĐÓNG GÓP GẦN ĐÂY</h3>
-    <div class="table-responsive">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th data-vi="Họ tên" data-en="Name">Họ tên</th>
-                    <th data-vi="Số tiền" data-en="Amount">Số tiền</th>
-                    <th data-vi="Lời nhắn" data-en="Message">Lời nhắn</th>
-                    <th data-vi="Ngày" data-en="Date">Ngày</th>
-                </tr>
-            </thead>
-            <!-- ID PHẢI KHỚP VỚI JAVASCRIPT -->
-            <tbody id="donationsTableBody">
-                <!-- Dữ liệu sẽ tự động đổ vào đây -->
-            </tbody>
-        </table>
-    </div>
-</div>       
+                    
+        </div>       
     </main>
 
     <footer class="bg-dark text-white pt-5 pb-4 mt-5">
@@ -887,234 +1050,197 @@ input::-webkit-inner-spin-button {
     </footer>
 
     <script>
-        // Language Switching
-        function changeLang(lang) {
-            document.querySelectorAll('[data-vi]').forEach(el => {
-                const text = el.getAttribute('data-' + lang);
-                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                    const placeholder = el.getAttribute('data-' + lang + '-placeholder');
-                    if (placeholder) {
-                        el.placeholder = placeholder;
-                    }
-                } else if (el.tagName === 'BUTTON' && el.type !== 'submit') {
-                    // Skip amount buttons
-                } else {
-                    el.innerText = text;
-                }
-            });
-            document.getElementById('btn-vi').classList.toggle('active', lang === 'vi');
-            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-        }
+    // --- 1. CÁC HÀM TRỢ GIÚP (Helper Functions) ---
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat('vi-VN', {
+            style: 'currency',
+            currency: 'VND',
+            minimumFractionDigits: 0
+        }).format(amount);
+    }
 
-        // Preloader
-        window.addEventListener('load', () => {
-            setTimeout(() => { 
-                const pre = document.getElementById('preloader');
-                if(pre) { 
-                    pre.style.opacity = '0'; 
-                    setTimeout(() => pre.style.display = 'none', 800); 
-                }
-                // Load donations data after page loads
-                loadDonations();
-            }, 1200);
+    function formatDate(dateString) {
+        if (!dateString) return '';
+        const date = new Date(dateString);
+        return date.toLocaleDateString('vi-VN', {
+            day: '2-digit', month: '2-digit', year: 'numeric'
         });
+    }
 
-        // Copy to Clipboard Function
-        function copyToClipboard(text, button) {
-            navigator.clipboard.writeText(text).then(() => {
-                // Visual feedback
-                const originalHTML = button.innerHTML;
-                button.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                button.classList.add('copied');
-                
-                setTimeout(() => {
-                    button.innerHTML = originalHTML;
-                    button.classList.remove('copied');
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy: ', err);
-                alert('Không thể sao chép. Vui lòng thử lại.');
-            });
-        }
-
-        // Amount Preset Selection
-        document.querySelectorAll('.amount-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                // Remove active class from all buttons
-                document.querySelectorAll('.amount-btn').forEach(b => {
-                    b.classList.remove('active');
-                });
-                
-                // Add active class to clicked button
-                this.classList.add('active');
-                
-                // Set the amount in hidden input and visible input
-                const amount = this.getAttribute('data-amount');
-                document.getElementById('donationAmount').value = amount;
-                document.getElementById('customAmount').value = amount;
-            });
-        });
-
-        // Custom Amount Input
-        document.getElementById('customAmount').addEventListener('input', function() {
-            const customAmount = this.value;
-            
-            // Remove active class from preset buttons
-            document.querySelectorAll('.amount-btn').forEach(b => {
-                b.classList.remove('active');
-            });
-            
-            // Set the amount in hidden input
-            document.getElementById('donationAmount').value = customAmount;
-        });
-
-        // Form Submission
-        document.getElementById('donationForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Validate amount
-            const amount = document.getElementById('donationAmount').value;
-            if (!amount || amount < 10000) {
-                alert('Vui lòng chọn số tiền đóng góp (tối thiểu 10,000 VNĐ)');
-                return;
+    // --- 2. LOGIC NGÔN NGỮ (Giữ nguyên của bạn) ---
+    function changeLang(lang) {
+        document.querySelectorAll('[data-vi]').forEach(el => {
+            const text = el.getAttribute('data-' + lang);
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                const placeholder = el.getAttribute('data-' + lang + '-placeholder');
+                if (placeholder) el.placeholder = placeholder;
+            } else {
+                el.innerText = text;
             }
-            
-            // Show loading
-            const submitBtn = document.getElementById('submitBtn');
-            const loadingSpinner = document.getElementById('loadingSpinner');
-            const originalText = submitBtn.innerHTML;
-            
-            submitBtn.disabled = true;
-            submitBtn.style.display = 'none';
-            loadingSpinner.style.display = 'block';
-            
-            // Submit form via AJAX
-            const formData = new FormData(this);
-            
-            fetch(this.action, {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                // Handle response
-                console.log('Form submission response:', data);
-                
-                // Show success message
-                loadingSpinner.style.display = 'none';
-                
-                const successHTML = `
-                    <div class="success-message" style="display: block;">
-                        <div class="success-icon">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <h4 data-vi="Cảm ơn bạn đã đóng góp!" data-en="Thank you for your donation!">
-                            Cảm ơn bạn đã đóng góp!
-                        </h4>
-                        <p data-vi="Thông tin đóng góp của bạn đã được ghi nhận. Chúng tôi sẽ xác nhận với bạn trong thời gian sớm nhất." 
-                           data-en="Your donation information has been recorded. We will confirm with you as soon as possible.">
-                            Thông tin đóng góp của bạn đã được ghi nhận. Chúng tôi sẽ xác nhận với bạn trong thời gian sớm nhất.
-                        </p>
-                        <p class="mt-3">
-                            <small data-vi="Chúng tôi sẽ gửi email xác nhận đến:" data-en="We will send confirmation email to:">Chúng tôi sẽ gửi email xác nhận đến:</small>
-                            <br>
-                            <strong>${formData.get('email')}</strong>
-                        </p>
-                        <button class="btn btn-success mt-3" onclick="location.reload()" 
-                                data-vi="Đóng góp tiếp" data-en="Donate Again">
-                            Đóng góp tiếp
-                        </button>
-                    </div>
-                `;
-                
-                document.querySelector('.confirmation-form').innerHTML = successHTML;
-                
-                // Reload donations data
-                setTimeout(loadDonations, 1000);
-            })
-            .catch(error => {
-                console.error('Form submission error:', error);
-                loadingSpinner.style.display = 'none';
-                submitBtn.style.display = 'block';
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalText;
-                
-                alert('Có lỗi xảy ra khi gửi form. Vui lòng thử lại.');
-            });
         });
+        document.getElementById('btn-vi').classList.toggle('active', lang === 'vi');
+        document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    }
 
-        // Function to load donations from database
-        function loadDonations() {
-    // Gọi file PHP ở Bước 1
-    fetch('<?php echo get_template_directory_uri(); ?>/process_donate.php')
-        .then(response => response.json())
+    // --- 3. TẢI DANH SÁCH (Cập nhật giao diện Đẹp) ---
+    function loadDonations() {
+    const tableBody = document.getElementById('donationsTableBody');
+    if (!tableBody) return;
+
+    // Thêm timestamp (&t=...) để chống lưu cache, giúp hiện tên mới ngay lập tức
+    fetch('<?php echo admin_url('admin-ajax.php'); ?>?action=get_donations&t=' + Date.now())
+        .then(r => r.json())
         .then(data => {
-            // Fix ID: Tìm đúng 'donationsTableBody'
-            const tableBody = document.getElementById('donationsTableBody');
-            if (!tableBody) return;
-
-            if (data.length > 0) {
-                let html = '';
-                data.forEach(donation => {
+            let html = '';
+            if (data && data.length > 0) {
+                data.forEach(d => {
                     html += `
                         <tr>
-                            <td class="p-3 fw-bold">${donation.fullname}</td>
-                            <td class="p-3 text-danger fw-bold">${formatCurrency(donation.amount)}</td>
-                            <td class="p-3 small italic">${donation.message || ''}</td>
-                            <td class="p-3 text-muted small">${formatDate(donation.created_at)}</td>
-                        </tr>
-                    `;
+                            <td class="text-start ps-4">
+                                <span class="donor-name-clean">${d.fullname}</span>
+                            </td>
+                            <td>
+                                <span class="amount-badge">${formatCurrency(d.amount)}</span>
+                            </td>
+                            <td class="text-muted small">
+                                <i class="far fa-calendar-alt me-1"></i> ${formatDate(d.created_at)}
+                            </td>
+                        </tr>`;
                 });
-                tableBody.innerHTML = html;
             } else {
-                tableBody.innerHTML = '<tr><td colspan="4" class="text-center py-4">Chưa có dữ liệu đóng góp</td></tr>';
+                html = '<tr><td colspan="3" class="text-center py-4">Chưa có dữ liệu đóng góp. 🌹</td></tr>';
             }
+            tableBody.innerHTML = html;
         })
-        .catch(error => {
-            console.error('Lỗi:', error);
-            document.getElementById('donationsTableBody').innerHTML = '<tr><td colspan="4" class="text-center text-danger">Lỗi tải dữ liệu</td></tr>';
-        });
+        .catch(err => console.error("Lỗi tải bảng:", err));
 }
 
-        // Helper function to format currency
-        function formatCurrency(amount) {
-            return new Intl.NumberFormat('vi-VN', {
-                style: 'currency',
-                currency: 'VND',
-                minimumFractionDigits: 0
-            }).format(amount);
-        }
-
-        // Helper function to format date
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            return date.toLocaleDateString('vi-VN', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric'
-            });
-        }
-
-        // Set today as default transfer date
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initial language setup
-            changeLang('vi');
+    // --- 4. XỬ LÝ COPY & CHỌN TIỀN ---
+    function copyToClipboard(text, button) {
+        navigator.clipboard.writeText(text).then(() => {
+            const original = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            button.classList.add('copied');
+            setTimeout(() => { button.innerHTML = original; button.classList.remove('copied'); }, 2000);
         });
+    }
 
-        // Add smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+    // Chọn số tiền nhanh
+    document.querySelectorAll('.amount-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            const amount = this.getAttribute('data-amount');
+            document.getElementById('donationAmount').value = amount;
+            document.getElementById('customAmount').value = amount;
+        });
+    });
+
+    // Tự gõ số tiền (Đồng bộ với hidden input)
+    const customInput = document.getElementById('customAmount');
+    if(customInput) {
+        customInput.addEventListener('input', function() {
+            document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('donationAmount').value = this.value;
+        });
+    }
+
+    // --- 5. GỬI FORM (Giữ logic Bắt bệnh Firewall của bạn) ---
+    document.getElementById('donationForm').onsubmit = function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn'), loader = document.getElementById('loadingSpinner');
+        const fd = new FormData(this);
+        fd.append('action', 'save_donation');
+
+        btn.style.display = 'none'; 
+        if(loader) loader.style.display = 'block';
+
+        fetch('<?php echo admin_url('admin-ajax.php'); ?>', { method: 'POST', body: fd })
+            .then(r => r.json())
+            .then(res => {
+                if(res.success) {
+                    // 1. Lấy dữ liệu để hiển thị
+                    const name = fd.get('fullname');
+                    const amount = formatCurrency(fd.get('amount'));
+                    const email = fd.get('email');
+                    const code = res.data.code || 'LRF-SUCCESS';
+
+                    // 2. PHẦN QUAN TRỌNG: Thay thế toàn bộ nội dung Form bằng thẻ Cảm ơn
+                    const formContainer = document.querySelector('.confirmation-form');
+                    formContainer.innerHTML = `
+                        <div class="success-card">
+                            <div class="heart-beat"><i class="fas fa-heart"></i></div>
+                            <h3 class="fw-bold text-success">TRÂN TRỌNG CẢM ƠN</h3>
+                            <p class="greeting">Chào <b>${name}</b>!</p>
+                            <p>Đóng góp của bạn đã mang đến hy vọng cho những mảnh đời yếu thế.</p>
+                            
+                            <div class="inner-receipt">
+                                <div class="receipt-item"><span>Mã giao dịch:</span> <b>#${code}</b></div>
+                                <div class="receipt-item"><span>Số tiền ủng hộ:</span> <span class="amt">${amount}</span></div>
+                                <div class="receipt-item"><span>Email xác nhận:</span> <b>${email}</b></div>
+                            </div>
+
+                            <p class="small text-muted italic">"Một đóa hồng nhỏ đã nở vì tấm lòng nhân ái của bạn."</p>
+                            <button class="btn btn-outline-success mt-3 px-5" style="border-radius:50px" onclick="location.reload()">Tiếp tục lan tỏa</button>
+                        </div>
+                    `;
+
+                    // 3. Kích hoạt hiệu ứng hoa rơi (Giống trang chủ)
+                    startFallingPetals();
+                    
+                    // 4. Load lại bảng danh sách ở dưới
+                    loadDonations();
+                } else {
+                    alert("Lỗi: " + res.data.message);
+                    btn.style.display = 'block'; if(loader) loader.style.display = 'none';
                 }
             });
-        });
-    </script>
+    };
+
+    // Hàm tạo hoa rơi khi thành công
+    function startFallingPetals() {
+        const petalInterval = setInterval(() => {
+            const petal = document.createElement('div');
+            const flowers = ['🌸', '🌹', '🍃'];
+            petal.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+            petal.className = 'petal-local';
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.fontSize = Math.random() * 20 + 10 + 'px';
+            petal.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+            document.body.appendChild(petal);
+            setTimeout(() => petal.remove(), 5000);
+        }, 300);
+
+        // Dừng hoa rơi sau 10 giây để đỡ tốn ram máy khách
+        setTimeout(() => clearInterval(petalInterval), 10000);
+    }
+
+    // --- 6. KHỞI TẠO (Preloader & Load bảng) ---
+    window.addEventListener('load', () => {
+        // Tự động chọn dự án nếu có ?program=... trên link
+        const urlParams = new URLSearchParams(window.location.search);
+        const programFromUrl = urlParams.get('program');
+        if (programFromUrl) {
+            const selectProgram = document.getElementById('program_name');
+            if (selectProgram) {
+                // Tìm option có value hoặc text khớp với programFromUrl
+                for(let i=0; i < selectProgram.options.length; i++) {
+                    if(selectProgram.options[i].value === programFromUrl) {
+                        selectProgram.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+        }
+        const pre = document.getElementById('preloader');
+        if(pre) {
+            pre.style.opacity = '0';
+            setTimeout(() => { pre.style.display = 'none'; }, 800);
+        }
+        changeLang('vi'); // Mặc định tiếng Việt
+        loadDonations();  // Chạy tải bảng ngay lập tức
+    });
+</script>
     
     <?php wp_footer(); ?>
 </body>

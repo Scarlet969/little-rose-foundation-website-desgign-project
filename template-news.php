@@ -102,73 +102,73 @@ Template Name: News Art - All In One
         }
         /* 2. LOADING ĐỒNG BỘ */
       /* --- 1. LOADING TRÁI TIM NHÂN ÁI (THAY THẾ TOÀN BỘ CODE CŨ) --- */
-/* --- LOADING TRÁI TIM CHUẨN NHÂN ÁI --- */
-#preloader {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
-}
+        /* --- LOADING TRÁI TIM CHUẨN NHÂN ÁI --- */
+        #preloader {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
 
-/* Vẽ trái tim theo kỹ thuật Diamond + Circle */
-.heart-pulse {
-    position: relative;
-    width: 60px;  /* Độ lớn trái tim */
-    height: 60px;
-    background-color: #B12029; /* Màu đỏ chuẩn LRF */
-    transform: rotate(-45deg); /* Xoay hình vuông thành hình thoi */
-    animation: heartbeatPlushing 1.2s infinite ease-in-out;
-    margin-top: 30px; /* Căn chỉnh vị trí */
-}
+        /* Vẽ trái tim theo kỹ thuật Diamond + Circle */
+        .heart-pulse {
+            position: relative;
+            width: 60px;  /* Độ lớn trái tim */
+            height: 60px;
+            background-color: #B12029; /* Màu đỏ chuẩn LRF */
+            transform: rotate(-45deg); /* Xoay hình vuông thành hình thoi */
+            animation: heartbeatPlushing 1.2s infinite ease-in-out;
+            margin-top: 30px; /* Căn chỉnh vị trí */
+        }
 
-.heart-pulse::before,
-.heart-pulse::after {
-    content: "";
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    background-color: #B12029;
-    border-radius: 50%; /* Tạo thành hình tròn */
-}
+        .heart-pulse::before,
+        .heart-pulse::after {
+            content: "";
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: #B12029;
+            border-radius: 50%; /* Tạo thành hình tròn */
+        }
 
-/* Đẩy hình tròn lên trên */
-.heart-pulse::before {
-    top: -30px;
-    left: 0;
-}
+        /* Đẩy hình tròn lên trên */
+        .heart-pulse::before {
+            top: -30px;
+            left: 0;
+        }
 
-/* Đẩy hình tròn sang phải */
-.heart-pulse::after {
-    top: 0;
-    left: 30px;
-}
+        /* Đẩy hình tròn sang phải */
+        .heart-pulse::after {
+            top: 0;
+            left: 30px;
+        }
 
-/* Hiệu ứng nhịp đập & Tỏa sáng (Quan trọng: phải giữ nguyên rotate(-45deg)) */
-@keyframes heartbeatPlushing {
-    0% { 
-        transform: scale(1) rotate(-45deg); 
-        filter: drop-shadow(0 0 5px rgba(177, 32, 41, 0.2)); 
-    }
-    14% { 
-        transform: scale(1.15) rotate(-45deg); /* Nhịp 1 */
-        filter: drop-shadow(0 0 20px rgba(177, 32, 41, 0.6)); 
-    }
-    28% { 
-        transform: scale(1.05) rotate(-45deg); 
-    }
-    42% { 
-        transform: scale(1.3) rotate(-45deg); /* Nhịp 2 mạnh hơn */
-        filter: drop-shadow(0 0 40px rgba(177, 32, 41, 0.8)); 
-    }
-    70% { 
-        transform: scale(1) rotate(-45deg); 
-        filter: drop-shadow(0 0 5px rgba(177, 32, 41, 0.2));
-    }
-}
+        /* Hiệu ứng nhịp đập & Tỏa sáng (Quan trọng: phải giữ nguyên rotate(-45deg)) */
+        @keyframes heartbeatPlushing {
+            0% { 
+                transform: scale(1) rotate(-45deg); 
+                filter: drop-shadow(0 0 5px rgba(177, 32, 41, 0.2)); 
+            }
+            14% { 
+                transform: scale(1.15) rotate(-45deg); /* Nhịp 1 */
+                filter: drop-shadow(0 0 20px rgba(177, 32, 41, 0.6)); 
+            }
+            28% { 
+                transform: scale(1.05) rotate(-45deg); 
+            }
+            42% { 
+                transform: scale(1.3) rotate(-45deg); /* Nhịp 2 mạnh hơn */
+                filter: drop-shadow(0 0 40px rgba(177, 32, 41, 0.8)); 
+            }
+            70% { 
+                transform: scale(1) rotate(-45deg); 
+                filter: drop-shadow(0 0 5px rgba(177, 32, 41, 0.2));
+            }
+        }
 
         /* 3. STYLE TIN TỨC & CHỐNG TRÀN ẢNH */
         .news-card { border: none; border-radius: 25px; overflow: hidden; transition: 0.4s; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 2.5rem; }
@@ -385,6 +385,143 @@ Template Name: News Art - All In One
             padding-bottom: 20px !important;
             margin-bottom: 20px !important;
         }
+        /* --- FIX DROPDOWN HOVER TRANG CHỦ --- */
+
+        /* Hiển thị menu cấp 2 khi di chuột vào "Về chúng tôi" */
+        .lrf-dropdown:hover > .dropdown-menu {
+            display: block !important;
+            margin-top: 0; /* Xóa khoảng trống để không bị mất hover khi di chuột xuống */
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Hiển thị menu cấp 3 (Đội ngũ nhân sự) khi di chuột vào */
+        .lrf-dropdown .dropend:hover > .dropdown-menu {
+            display: block !important;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            margin-left: 0;
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Style cho các hộp menu dropdown */
+        .lrf-dropdown .dropdown-menu {
+            border-radius: 12px;
+            padding: 10px 0;
+            min-width: 250px;
+            background: #ffffff;
+            border: none !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
+            animation: fadeInMenu 0.3s ease;
+        }
+
+        /* Căn chỉnh các item trong menu */
+        .lrf-dropdown .dropdown-item {
+            padding: 12px 20px;
+            color: #333 !important;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600 !important;
+            border-bottom: 1px solid #f8f9fa;
+            transition: all 0.2s ease;
+        }
+
+        .lrf-dropdown .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .lrf-dropdown .dropdown-item:hover {
+            background-color: #f1f8f4; /* Màu xanh lá cực nhẹ */
+            color: var(--primary-green) !important;
+            padding-left: 28px; /* Hiệu ứng nhích sang phải */
+        }
+
+        /* Đảm bảo mũi tên icon ở menu cấp 2 luôn nằm bên phải */
+        .lrf-dropdown .dropend .fa-chevron-right {
+            font-size: 0.75rem;
+            color: #999;
+        }
+
+        /* Hiệu ứng xuất hiện */
+        @keyframes fadeInMenu {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Đảm bảo Navbar luôn nằm trên cùng của Hero và Cánh hoa */
+        nav.navbar {
+            z-index: 2000 !important;
+        }
+
+        /* Fix lỗi trên mobile: không hover được thì dùng click */
+        @media (max-width: 991px) {
+            .lrf-dropdown .dropdown-menu { 
+                position: static !important; 
+                display: none; 
+                box-shadow: none !important;
+                border-left: 3px solid var(--primary-green) !important;
+                margin-left: 15px;
+            }
+            .lrf-dropdown.show > .dropdown-menu { 
+                display: block !important; 
+            }
+        }
+        /* Hiện menu khi hover cấp 1 */
+        .lrf-dropdown:hover > .dropdown-menu {
+            display: block;
+            margin-top: 0;
+        }
+
+        /* Hiện menu con cấp 3 khi hover (Nested Dropdown) */
+        .lrf-dropdown .dropend:hover > .dropdown-menu {
+            display: block;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            margin-left: 0;
+        }
+
+        /* Style cho Dropdown Item giống ảnh mẫu */
+        .lrf-dropdown .dropdown-menu {
+            border-radius: 10px;
+            padding: 10px 0;
+            min-width: 240px;
+            background: #ffffff;
+            animation: fadeInMenu 0.3s ease;
+        }
+
+        .lrf-dropdown .dropdown-item {
+            padding: 12px 20px;
+            color: #333 !important;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #f1f1f1; /* Đường kẻ phân cách nhẹ */
+            transition: all 0.2s ease;
+        }
+
+        .lrf-dropdown .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .lrf-dropdown .dropdown-item:hover {
+            background-color: #f8f9fa;
+            color: var(--maroon-dark) !important; /* Đổi màu khi hover */
+            padding-left: 25px; /* Hiệu ứng nhích sang phải nhẹ */
+        }
+
+        /* Hiệu ứng xuất hiện mượt */
+        @keyframes fadeInMenu {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Fix cho mobile: Vẫn cho click nếu cần */
+        @media (max-width: 991px) {
+            .lrf-dropdown .dropdown-menu { position: static; display: none; }
+            .lrf-dropdown.show .dropdown-menu { display: block; }
+        }
     </style>
     <?php wp_head(); ?>
 </head>
@@ -412,22 +549,50 @@ Template Name: News Art - All In One
                     <a class="nav-link <?php echo is_front_page() ? 'active text-success' : 'text-dark'; ?> px-3 fw-bold" 
                        href="<?php echo home_url('/'); ?>" data-vi="Trang chủ" data-en="Home">Trang chủ</a>
                 </li>
-                <!-- Về chúng tôi -->
-                <li class="nav-item">
-                    <a class="nav-link <?php echo is_page('about') ? 'active text-success' : 'text-dark'; ?> px-3 fw-bold" 
-                       href="<?php echo home_url('/about/'); ?>" data-vi="Về chúng tôi" data-en="About Us">Về chúng tôi</a>
-                </li>
+               <!-- Về chúng tôi -->
+                    <li class="nav-item dropdown lrf-dropdown">
+                        <a class="nav-link dropdown-toggle fw-bold px-3" href="<?php echo home_url('/about/'); ?>" id="aboutDropdown" role="button" data-vi="Về chúng tôi" data-en="About Us">
+                            Về chúng tôi
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="aboutDropdown">
+                            <!-- Cấp 2: Đội ngũ nhân sự (Có menu con cấp 3) -->
+                            <li class="dropend">
+                                <a class="dropdown-item d-flex justify-content-between align-items-center fw-bold" href="<?php echo home_url('/nhan-su'); ?>" data-vi="Đội ngũ nhân sự" data-en="LRF’s Board and Team">
+                                    Đội ngũ nhân sự <i class="fas fa-chevron-right ms-2" style="font-size: 0.7rem;"></i>
+                                </a>
+                                <!-- MENU CON CẤP 3 (Hiện ra khi hover vào Đội ngũ) -->
+                                <ul class="dropdown-menu shadow border-0 submenu-left">
+                                    <li><a class="dropdown-item" href="<?php echo home_url('/nhan-su/?cat=board'); ?>" data-vi="Hội đồng quản lý" data-en="Board of Directors">Hội đồng quản lý</a></li>
+                                    <li><a class="dropdown-item" href="<?php echo home_url('/nhan-su/?cat=control'); ?>" data-vi="Ban kiểm soát" data-en="Supervisory Committee">Ban kiểm soát</a></li>
+                                    <li><a class="dropdown-item" href="<?php echo home_url('/nhan-su/?cat=advisor'); ?>" data-vi="Ban cố vấn" data-en="Advisory Board">Ban cố vấn</a></li>
+                                </ul>
+                            </li>
+
+                            <!-- Các mục khác của cấp 2 -->
+                            <li><a class="dropdown-item fw-bold" href="<?php echo home_url('/tam-nhin-su-menh'); ?>" data-vi="Tầm nhìn, Sứ mệnh và Giá trị" data-en="Vision, Mission, Values">Tầm nhìn, Sứ mệnh và Giá trị</a></li>
+                            <li><a class="dropdown-item fw-bold" href="<?php echo home_url('/gia-tri-cot-loi'); ?>" data-vi="Giá trị cốt lõi" data-en="Core Commitments">Giá trị cốt lõi</a></li>
+                        </ul>
+                    </li>
                 <!-- Chương trình -->
                 <li class="nav-item">
-                    <a class="nav-link <?php echo is_page('project') ? 'active text-success' : 'text-dark'; ?> px-3 fw-bold" 
-                       href="<?php echo home_url('/project/'); ?>" data-vi="Chương trình" data-en="Programs">Chương trình</a>
+                    <a class="nav-link <?php echo is_page('projects') ? 'active text-success' : 'text-dark'; ?> px-3 fw-bold" 
+                       href="<?php echo home_url('/projects/'); ?>" data-vi="Chương trình" data-en="Programs">Chương trình</a>
                 </li>
-                <!-- Thêm mục Báo cáo tài chính vào Menu -->
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo is_page('bao-cao') ? 'active text-success' : ''; ?> px-3 fw-bold" 
-                        href="<?php echo home_url('/bao-cao/'); ?>" 
-                        data-vi="Báo cáo tài chính" 
-                        data-en="Reports">Báo cáo tài chính</a>
+                <!-- Báo cáo tài chính -->
+                    <li class="nav-item dropdown lrf-dropdown">
+                        <a class="nav-link dropdown-toggle fw-bold px-3" href="<?php echo home_url('/bao-cao/'); ?>" id="aboutDropdown" role="button" data-vi="Báo cáo tài chính" data-en="Reports">
+                            Báo cáo tài chính
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="aboutDropdown">
+                            <!-- Cấp 2: Đội ngũ nhân sự (Có menu con cấp 3) -->
+                            <li class="dropend">
+                                <a class="dropdown-item d-flex justify-content-between align-items-center fw-bold" href="<?php echo home_url('/da-hoan-thanh'); ?>" data-vi="Dự án đã hoàn thành" data-en="Completed Projects">
+                                    Dự án đã hoàn thành <i class="fas fa-chevron-right ms-2" style="font-size: 0.7rem;"></i>
+                                </a>                                
+                            </li>
+                            <!-- Các mục khác của cấp 2 -->
+                            <li><a class="dropdown-item fw-bold" href="<?php echo home_url('/dang-trien-khai'); ?>" data-vi="Dự án đang triển khai" data-en="Active Projects">Dự án đang triển khai</a></li>
+                        </ul>
                     </li>
                 <!-- Tin tức -->
                 <li class="nav-item">
@@ -483,7 +648,7 @@ Template Name: News Art - All In One
                 <div class="news-card border-0 shadow-sm">
                     <a href="https://littlerosesfoundation.org/announcement-little-roses-foundations-2024-loving-scholarship/" target="_blank">
                         <div class="news-img-container">
-                            <img src="http://localhost/little-rose-web/wp-content/uploads/2025/12/485897246_654237967353352_6112021819464681319_n.jpg" alt="Scholarship">
+                            <img src="https://petal-three-lrf.infinityfreeapp.com/wp-content/uploads/2025/12/education-scholarship.jpg" alt="Scholarship">
                             <span class="date-badge">27 June 2024</span>
                         </div>
                     </a>
@@ -511,7 +676,7 @@ Template Name: News Art - All In One
                                 <i class="fas fa-download me-2"></i> 2,450 <span data-vi="tải" data-en="hits">tải</span>
                             </span>
                         </div>
-                        <a href="http://localhost/little-rose-web/wp-content/uploads/2025/12/Danh-sach-to-chuc-ca-nhan-quyen-gop-nam-2023-1.pdf" target="_blank" class="btn-outline-download">Download</a>
+                        <a href="https://petal-three-lrf.infinityfreeapp.com/wp-content/uploads/2025/12/Danh-sach-to-chuc-ca-nhan-quyen-gop-nam-2023-1.pdf" target="_blank" class="btn-outline-download">Download</a>
                     </div>
 
                     <div class="doc-divider"></div>
@@ -525,7 +690,7 @@ Template Name: News Art - All In One
                                 <i class="fas fa-download me-2"></i> 1,120 <span data-vi="tải" data-en="hits">tải</span>
                             </span>
                         </div>
-                        <a href="http://localhost/little-rose-web/wp-content/uploads/2025/12/TB-HB-Bong-hong-nho-Phuc-vu-NK-2025-2029-so-002_2025_TB-LRF-.pdf" download class="btn-outline-download">Download</a>
+                        <a href="https://petal-three-lrf.infinityfreeapp.com/wp-content/uploads/2025/12/TB-HB-Bong-hong-nho-Phuc-vu-NK-2025-2029-so-002_2025_TB-LRF-.pdf" download class="btn-outline-download">Download</a>
                     </div>
                 </div>
             </div>
@@ -589,12 +754,34 @@ Template Name: News Art - All In One
                 });
             });
         });
-        window.addEventListener('load', function() {
-            setTimeout(() => {
-                const preloader = document.getElementById('preloader');
-                if(preloader) { preloader.style.opacity = '0'; setTimeout(() => { preloader.style.display = 'none'; }, 800); }
-            }, 1200);
-        });
+        // 7. Chạy khi trang load xong
+     window.addEventListener('load', () => {
+        // 1. Xử lý lọc đội ngũ (nếu có)
+        const urlParams = new URLSearchParams(window.location.search);
+        const catFromUrl = urlParams.get('cat') || 'board';
+        
+        // Kiểm tra nếu hàm filterTeam tồn tại (chỉ ở trang Đội ngũ mới có)
+        if (typeof filterTeam === "function") {
+            filterTeam(catFromUrl);
+        }
+
+        // 2. XỬ LÝ LOADING THÔNG MINH
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
+            // Kiểm tra: Nếu người dùng đến từ chính trang web của mình (chuyển tiếp nội bộ)
+            // document.referrer sẽ chứa link trang trước đó.
+            if (document.referrer.includes(window.location.hostname)) {
+                // Ẩn ngay lập tức, không đợi animation
+                preloader.style.display = 'none';
+            } else {
+                // Nếu vào từ Google hoặc gõ trực tiếp (lần đầu), hiện animation cho đẹp
+                preloader.style.opacity = '0';
+                setTimeout(() => { 
+                    preloader.style.display = 'none'; 
+                }, 500);
+            }
+        }
+    });
     </script>
     <?php wp_footer(); ?>
 </body>

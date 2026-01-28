@@ -12,8 +12,10 @@ Template Name: Trang Chu Art - All In One
     <!-- 1. Thư viện & Font chữ chuẩn -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <style>
         :root { 
@@ -300,6 +302,167 @@ Template Name: Trang Chu Art - All In One
             z-index: 10001;
             transition: all 0.3s ease;
         }
+        /* Hiện menu con cấp 3 khi hover (Nested Dropdown) */
+        .lrf-dropdown .dropend:hover > .dropdown-menu {
+            display: block;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            margin-left: 0;
+        }
+
+        /* --- FIX DROPDOWN HOVER TRANG CHỦ --- */
+
+        /* Hiển thị menu cấp 2 khi di chuột vào "Về chúng tôi" */
+        .lrf-dropdown:hover > .dropdown-menu {
+            display: block !important;
+            margin-top: 0; /* Xóa khoảng trống để không bị mất hover khi di chuột xuống */
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Hiển thị menu cấp 3 (Đội ngũ nhân sự) khi di chuột vào */
+        .lrf-dropdown .dropend:hover > .dropdown-menu {
+            display: block !important;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            margin-left: 0;
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Style cho các hộp menu dropdown */
+        .lrf-dropdown .dropdown-menu {
+            border-radius: 12px;
+            padding: 10px 0;
+            min-width: 250px;
+            background: #ffffff;
+            border: none !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
+            animation: fadeInMenu 0.3s ease;
+        }
+
+        /* Căn chỉnh các item trong menu */
+        .lrf-dropdown .dropdown-item {
+            padding: 12px 20px;
+            color: #333 !important;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600 !important;
+            border-bottom: 1px solid #f8f9fa;
+            transition: all 0.2s ease;
+        }
+
+        .lrf-dropdown .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .lrf-dropdown .dropdown-item:hover {
+            background-color: #f1f8f4; /* Màu xanh lá cực nhẹ */
+            color: var(--primary-green) !important;
+            padding-left: 28px; /* Hiệu ứng nhích sang phải */
+        }
+
+        /* Đảm bảo mũi tên icon ở menu cấp 2 luôn nằm bên phải */
+        .lrf-dropdown .dropend .fa-chevron-right {
+            font-size: 0.75rem;
+            color: #999;
+        }
+
+        /* Hiệu ứng xuất hiện */
+        @keyframes fadeInMenu {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Đảm bảo Navbar luôn nằm trên cùng của Hero và Cánh hoa */
+        nav.navbar {
+            z-index: 2000 !important;
+        }
+
+        /* Fix lỗi trên mobile: không hover được thì dùng click */
+        @media (max-width: 991px) {
+            .lrf-dropdown .dropdown-menu { 
+                position: static !important; 
+                display: none; 
+                box-shadow: none !important;
+                border-left: 3px solid var(--primary-green) !important;
+                margin-left: 15px;
+            }
+            .lrf-dropdown.show > .dropdown-menu { 
+                display: block !important; 
+            }
+        }
+        /* --- CSS CHO HERO SLIDER --- */
+        .hero-slider-wrapper {
+            height: 90vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-swiper {
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-slide {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-slide .content-box {
+            position: relative;
+            z-index: 5;
+        }
+
+        .hero-slide h1 {
+            font-size: 4.5rem !important;
+            font-weight: 900 !important;
+            text-transform: uppercase;
+        }
+
+        /* Hiệu ứng chữ hiện ra khi slide chuyển tới */
+        .swiper-slide-active h1 {
+            animation: fadeInUp 1s both;
+        }
+        .swiper-slide-active p {
+            animation: fadeInUp 1s both 0.3s;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes heartBeat {
+        0% { transform: scale(1); }
+        14% { transform: scale(1.15); }
+        28% { transform: scale(1); }
+        42% { transform: scale(1.3); }
+        70% { transform: scale(1); }
+		}
+        .benefit-icon {
+        width: 50px;
+        height: 50px;
+        background: white;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    .join-benefits h5 {
+        font-size: 1.1rem;
+        color: #333;
+        font-family: 'Montserrat', sans-serif;
+    }
     </style>
     <?php wp_head(); ?>
 </head>
@@ -325,28 +488,54 @@ Template Name: Trang Chu Art - All In One
                         <a class="nav-link <?php echo is_front_page() ? 'active text-success' : 'text-dark'; ?> px-3 fw-bold" 
                            href="<?php echo home_url('/'); ?>" data-vi="Trang chủ" data-en="Home">Trang chủ</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo is_page('about') ? 'active text-success' : 'text-dark'; ?> px-3 fw-bold" 
-                           href="<?php echo home_url('/about/'); ?>" data-vi="Về chúng tôi" data-en="About Us">Về chúng tôi</a>
+                    <!-- Về chúng tôi -->
+                    <li class="nav-item dropdown lrf-dropdown">
+                        <a class="nav-link dropdown-toggle fw-bold px-3" href="<?php echo home_url('/about/'); ?>" id="aboutDropdown" role="button" data-vi="Về chúng tôi" data-en="About Us">
+                            Về chúng tôi
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="aboutDropdown">
+                            <!-- Cấp 2: Đội ngũ nhân sự (Có menu con cấp 3) -->
+                            <li class="dropend">
+                                <a class="dropdown-item d-flex justify-content-between align-items-center fw-bold" href="<?php echo home_url('/nhan-su'); ?>" data-vi="Đội ngũ nhân sự" data-en="LRF’s Board and Team">
+                                    Đội ngũ nhân sự <i class="fas fa-chevron-right ms-2" style="font-size: 0.7rem;"></i>
+                                </a>
+                                <!-- MENU CON CẤP 3 (Hiện ra khi hover vào Đội ngũ) -->
+                                <ul class="dropdown-menu shadow border-0 submenu-left">
+                                    <li><a class="dropdown-item" href="<?php echo home_url('/nhan-su/?cat=board'); ?>" data-vi="Hội đồng quản lý" data-en="Board of Directors">Hội đồng quản lý</a></li>
+                                    <li><a class="dropdown-item" href="<?php echo home_url('/nhan-su/?cat=control'); ?>" data-vi="Ban kiểm soát" data-en="Supervisory Committee">Ban kiểm soát</a></li>
+                                    <li><a class="dropdown-item" href="<?php echo home_url('/nhan-su/?cat=advisor'); ?>" data-vi="Ban cố vấn" data-en="Advisory Board">Ban cố vấn</a></li>
+                                </ul>
+                            </li>
+
+                            <!-- Các mục khác của cấp 2 -->
+                            <li><a class="dropdown-item fw-bold" href="<?php echo home_url('/tam-nhin-su-menh'); ?>" data-vi="Tầm nhìn, Sứ mệnh và Giá trị" data-en="Vision, Mission, Values">Tầm nhìn, Sứ mệnh và Giá trị</a></li>
+                            <li><a class="dropdown-item fw-bold" href="<?php echo home_url('/gia-tri-cot-loi'); ?>" data-vi="Giá trị cốt lõi" data-en="Core Commitments">Giá trị cốt lõi</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php echo is_page('project') ? 'active text-success' : 'text-dark'; ?> px-3 fw-bold" 
                            href="<?php echo home_url('/project/'); ?>" data-vi="Chương trình" data-en="Programs">Chương trình</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo is_page('bao-cao') ? 'active text-success' : ''; ?> px-3 fw-bold" 
-                        href="<?php echo home_url('/bao-cao/'); ?>" 
-                        data-vi="Báo cáo tài chính" 
-                        data-en="Reports">Báo cáo tài chính</a>
+                    <!-- Báo cáo tài chính -->                   
+                    <li class="nav-item dropdown lrf-dropdown">
+                        <a class="nav-link dropdown-toggle fw-bold px-3" href="<?php echo home_url('/bao-cao/'); ?>" id="aboutDropdown" role="button" data-vi="Báo cáo tài chính" data-en="Reports">
+                            Báo cáo tài chính
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="aboutDropdown">
+                            <!-- Cấp 2: Đội ngũ nhân sự (Có menu con cấp 3) -->
+                            <li class="dropend">
+                                <a class="dropdown-item d-flex justify-content-between align-items-center fw-bold" href="<?php echo home_url('/da-hoan-thanh'); ?>" data-vi="Dự án đã hoàn thành" data-en="Completed Projects">
+                                    Dự án đã hoàn thành <i class="fas fa-chevron-right ms-2" style="font-size: 0.7rem;"></i>
+                                </a>                                
+                            </li>
+                            <!-- Các mục khác của cấp 2 -->
+                            <li><a class="dropdown-item fw-bold" href="<?php echo home_url('/dang-trien-khai'); ?>" data-vi="Dự án đang triển khai" data-en="Active Projects">Dự án đang triển khai</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php echo is_page('news') ? 'active text-success' : 'text-dark'; ?> px-3 fw-bold" 
                            href="<?php echo home_url('/news/'); ?>" data-vi="Tin tức" data-en="News">Tin tức</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-donate ms-lg-4 px-4 py-2 fw-bold shadow-sm" 
-                           href="<?php echo home_url('/donate/'); ?>" data-vi="ĐÓNG GÓP" data-en="DONATE">ĐÓNG GÓP</a>
-                    </li>
+                    </li>                    
                     <li class="nav-item d-flex ms-lg-4 fw-bold">
                         <span class="lang-switch active fw-bold" id="btn-vi" onclick="changeLang('vi')" style="cursor:pointer">VN</span>
                         <span class="mx-1 text-muted">|</span>
@@ -359,27 +548,74 @@ Template Name: Trang Chu Art - All In One
 
     <!-- TRANG CHỦ CONTENT -->
     <main>
-        <section class="hero-custom">
-            <div id="petal-container"></div>
-            <div class="container" style="position: relative; z-index: 5;">
-                <h1 style="font-family: 'Montserrat', sans-serif !important; font-weight: 900 !important; font-size: 4.5rem !important; letter-spacing: 1px !important; text-transform: uppercase !important; color: white !important;" 
-                    data-vi="TO ALL WE ARE LOVE" 
-                    data-en="TO ALL WE ARE LOVE">
-                    TO ALL WE ARE LOVE
-                </h1>
-                
-                <p class="lead mt-4 fw-light" style="max-width: 850px; margin: 0 auto; font-family: 'Montserrat', sans-serif !important; font-size: 1.25rem; color: white !important;" 
-                data-vi="Đồng hành cùng trẻ em yếu thế kiến tạo tương lai tươi sáng qua giáo dục và y tế." 
-                data-en="Accompanying vulnerable children to create a bright future through education and healthcare.">
-                Đồng hành cùng trẻ em yếu thế kiến tạo tương lai tươi sáng qua giáo dục và y tế.
-                </p>
+        <!-- HERO SLIDER -->
+        <section class="hero-slider-wrapper">
+            <div class="swiper hero-swiper">
+                <div class="swiper-wrapper">
 
-                <a href="<?php echo home_url('/donate/'); ?>" class="btn btn-donate px-5 py-3 mt-5 shadow-lg" 
-                style="font-family: 'Montserrat', sans-serif !important; font-weight: 800 !important; text-transform: uppercase !important;"
-                data-vi="ỦNG HỘ NGAY" 
-                data-en="DONATE NOW">
-                ỦNG HỘ NGAY
-                </a>
+                    <!-- SLIDE 1: DẪN ĐẾN TRANG ABOUT -->
+                    <div class="swiper-slide hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://petal-three-lrf.infinityfreeapp.com/wp-content/uploads/2025/12/background.jpg');">
+                        <div class="container content-box">
+                            <h1 data-vi="TO ALL WE ARE LOVE" data-en="TO ALL WE ARE LOVE">TO ALL WE ARE LOVE</h1>
+                            <p class="lead mt-4" data-vi="Đồng hành cùng trẻ em yếu thế kiến tạo tương lai tươi sáng qua giáo dục và y tế." data-en="Accompanying vulnerable children to create a bright future through education and healthcare.">Đồng hành cùng trẻ em yếu thế kiến tạo tương lai tươi sáng qua giáo dục và y tế.</p>
+                            <a href="<?php echo home_url('/about/'); ?>" class="btn btn-donate px-5 py-3 mt-5 shadow-lg" data-vi="TÌM HIỂU THÊM" data-en="LEARN MORE">TÌM HIỂU THÊM</a>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 2: DẪN ĐẾN TRANG DONATE -->
+                    <div class="swiper-slide hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://petal-three-lrf.infinityfreeapp.com/wp-content/uploads/2026/01/hoc-bong-bong-hong-nho-yeu-thuong-duoc-trao-tan-tay-hoc-sinh-ngheo-vuot-kho-o-nghe-an-trong-nam-hoc-2023-2024.jpg');">
+                        <div class="container content-box">
+                            <h1 data-vi="LAN TỎA NHÂN ÁI" data-en="SPREADING LOVE">LAN TỎA NHÂN ÁI</h1>
+                            <p class="lead mt-4" data-vi="Mỗi sự đóng góp là một đóa hồng trao gửi niềm tin và hy vọng." data-en="Every contribution is a rose of faith and hope.">Mỗi sự đóng góp là một đóa hồng trao gửi niềm tin và hy vọng.</p>
+                            <a href="<?php echo home_url('/bao-cao/'); ?>" class="btn btn-donate px-5 py-3 mt-5 shadow-lg" data-vi="BÁO CÁO TÀI CHÍNH" data-en="REPORT">BÁO CÁO TÀI CHÍNH</a>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 3: DẪN ĐẾN TRANG PROJECT -->
+                    <div class="swiper-slide hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://petal-three-lrf.infinityfreeapp.com/wp-content/uploads/2025/12/background.jpg');">
+                        <div class="container content-box">
+                            <h1 data-vi="VÌ MỘT TƯƠNG LAI" data-en="FOR THE FUTURE">VÌ MỘT TƯƠNG LAI</h1>
+                            <p class="lead mt-4" data-vi="Chung tay cùng cộng đồng xây dựng thế giới tốt đẹp hơn cho trẻ em." data-en="Joining hands to build a better world for children.">Chung tay cùng cộng đồng xây dựng thế giới tốt đẹp hơn cho trẻ em.</p>
+                            <a href="<?php echo home_url('/project/'); ?>" class="btn btn-donate px-5 py-3 mt-5 shadow-lg" data-vi="XEM CHƯƠNG TRÌNH" data-en="OUR PROGRAMS">XEM CHƯƠNG TRÌNH</a>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Cánh hoa rơi Layer -->
+                <div id="petal-container" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 10; pointer-events: none;"></div>
+            </div>
+        </section>
+        <!-- VIDEO KỶ NIỆM 3 NĂM - ĐẶT TRÊN IMPACT DASHBOARD -->
+        <section class="section-padding pb-0" style="background-color: var(--bg-warm);">
+            <div class="container">
+                <div class="row justify-content-center text-center mb-5">
+                    <div class="col-lg-8">
+                        <h2 class="fw-bold mb-3" style="font-family: 'Montserrat', sans-serif; color: #B12029;" 
+                            data-vi="Kỷ Niệm 3 Năm Hoạt Động" data-en="3rd Anniversary Highlights">
+                            Kỷ Niệm 3 Năm Hoạt Động
+                        </h2>
+                        <p class="text-muted" data-vi="Đối tác nói gì về chúng tôi?" data-en="What our partners say about us">
+                            Đối tác nói gì về chúng tôi?
+                        </p>
+                        <div class="divider-rose" style="width: 80px; margin-top: 10px;"></div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <!-- Frame Video cao cấp -->
+                        <div class="ratio ratio-16x9 rounded-5 shadow-lg overflow-hidden border" 
+                             style="border: 12px solid #ffffff !important; box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;">
+                            <iframe 
+                                src="https://www.youtube.com/embed/N93L_Ibeelk" 
+                                title="Kỷ niệm 3 năm hoạt động Quỹ Bông Hồng Nhỏ" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         
@@ -474,53 +710,135 @@ Template Name: Trang Chu Art - All In One
             </div>
         </section>
 
-        <!-- VIDEO & FORM -->
+        <!-- SECTION: THAM GIA CÙNG LRF -->
         <section class="section-padding bg-white">        
             <div class="container">
                 <div class="row g-5 align-items-center">
-                    <div class="col-lg-5">
-                        <h3 class="fw-bold mb-4" style="font-family: 'Montserrat', sans-serif;" data-vi="Hành trình lan tỏa nhân ái" data-en="Our Journey of Love">Hành trình lan tỏa nhân ái</h3>
-                        <p class="text-secondary mb-4 small" data-vi="Cùng nhìn lại những khoảnh khắc xúc động và những dự án mà LRF đã triển khai để hỗ trợ cộng đồng yếu thế trên khắp Việt Nam." data-en="Let's look back at the touching moments and projects that LRF has implemented to support vulnerable communities across Vietnam.">
-                            Cùng nhìn lại những khoảnh khắc xúc động và những dự án mà LRF đã triển khai để hỗ trợ cộng đồng yếu thế trên khắp Việt Nam.
+
+                    <!-- CỘT TRÁI: LÝ DO THAM GIA (Thay thế hoàn toàn phần video cũ) -->
+                    <div class="col-lg-6">
+                        <h2 class="fw-bold mb-4" style="font-family: 'Montserrat', sans-serif; color: #008D42;" 
+                            data-vi="Tại sao nên tham gia cùng LRF?" data-en="Why join LRF?">
+                            Tại sao nên tham gia cùng LRF?
+                        </h2>
+                        <p class="text-muted mb-5" data-vi="Mỗi cá nhân tham gia là một cánh tay nối dài giúp sứ mệnh thiện nguyện đi xa hơn." data-en="Every individual who joins is an extended arm helping the charitable mission go further.">
+                            Mỗi cá nhân tham gia là một cánh tay nối dài giúp sứ mệnh thiện nguyện đi xa hơn.
                         </p>
-                        
-                        <div class="ratio ratio-16x9 rounded-5 shadow-lg overflow-hidden border" style="border: 8px solid #f8f9fa !important;">
-                            <iframe 
-                                src="https://www.youtube.com/embed/N93L_Ibeelk" 
-                                title="Little Roses Foundation Video" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                allowfullscreen>
-                            </iframe>
+
+                        <div class="join-benefits">
+                            <!-- Lợi ích 1 -->
+                            <div class="d-flex mb-4 align-items-start">
+                                <div class="benefit-icon me-3 shadow-sm">
+                                    <i class="fas fa-heart text-danger fa-lg"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-1" data-vi="Lan tỏa yêu thương" data-en="Spread Love">Lan tỏa yêu thương</h5>
+                                    <p class="small text-muted mb-0" data-vi="Trực tiếp hỗ trợ và mang lại nụ cười cho hàng ngàn trẻ em yếu thế." data-en="Directly support and bring smiles to thousands of vulnerable children.">Trực tiếp hỗ trợ và mang lại nụ cười cho hàng ngàn trẻ em yếu thế.</p>
+                                </div>
+                            </div>
+
+                            <!-- Lợi ích 2 -->
+                            <div class="d-flex mb-4 align-items-start">
+                                <div class="benefit-icon me-3 shadow-sm">
+                                    <i class="fas fa-users text-success fa-lg"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-1" data-vi="Cộng đồng nhân ái" data-en="Compassionate Community">Cộng đồng nhân ái</h5>
+                                    <p class="small text-muted mb-0" data-vi="Kết nối với những người bạn cùng chí hướng trên khắp cả nước." data-en="Connect with like-minded friends across the country.">Kết nối với những người bạn cùng chí hướng trên khắp cả nước.</p>
+                                </div>
+                            </div>
+
+                            <!-- Lợi ích 3 -->
+                            <div class="d-flex mb-4 align-items-start">
+                                <div class="benefit-icon me-3 shadow-sm">
+                                    <i class="fas fa-graduation-cap text-primary fa-lg"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-1" data-vi="Trải nghiệm ý nghĩa" data-en="Meaningful Experience">Trải nghiệm ý nghĩa</h5>
+                                    <p class="small text-muted mb-0" data-vi="Rèn luyện kỹ năng, làm giàu vốn sống qua các chuyến đi thực tế." data-en="Gain skills and enrich your life through field trips.">Rèn luyện kỹ năng, làm giàu vốn sống qua các chuyến đi thực tế.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-4 bg-light border-start border-success border-5 mt-5">
+                            <p class="mb-0 fst-italic text-dark" style="font-size: 0.95rem;" 
+                               data-vi="“Mỗi đóng góp sức lực của bạn đều góp phần viết nên tương lai tươi sáng cho các em.”" 
+                               data-en="“Every bit of your effort contributes to writing a bright future for the children.”">
+                               “Mỗi đóng góp sức lực của bạn đều góp phần viết nên tương lai tươi sáng cho các em.”
+                            </p>
                         </div>
                     </div>
 
+                    <!-- CỘT PHẢI: FORM ĐĂNG KÝ (Giữ nguyên logic của bạn nhưng tối ưu hiển thị) -->
                     <div class="col-lg-5 offset-lg-1">
-                        <div class="bg-light p-5 rounded-5 shadow-sm border-top border-success border-4">
+                        <div class="bg-light p-4 p-md-5 rounded-5 shadow-sm border-top border-success border-4">
                             <h3 class="fw-bold mb-4" style="font-family: 'Montserrat', sans-serif;" data-vi="Tham gia cùng LRF" data-en="Join with LRF">Tham gia cùng LRF</h3>
-                            <p class="small text-muted mb-4" data-vi="Để lại thông tin để trở thành Tình nguyện viên hoặc Đối tác của chúng tôi." data-en="Leave your information to become our Volunteer or Partner.">Để lại thông tin để trở thành Tình nguyện viên.</p>
-                            
-                            <form id="volunteerForm" action="<?php echo get_template_directory_uri(); ?>/process_join.php" method="POST">
-                                <div class="mb-3">
-                                    <input type="text" name="fullname" class="form-control border-0 py-3 shadow-sm" style="border-radius: 12px;" placeholder="Nguyễn Văn A" required>
+                            <p class="small text-muted mb-4" data-vi="Để lại thông tin để chúng tôi liên hệ với bạn sớm nhất." data-en="Leave your info so we can contact you as soon as possible.">Để lại thông tin để trở thành Tình nguyện viên.</p>
+
+                            <form id="volunteerForm" enctype="multipart/form-data">
+                                <div class="row g-3">
+                                    <!-- Họ tên -->
+                                    <div class="col-md-12">
+                                        <input type="text" name="fullname" class="form-control border-0 py-3 shadow-sm" style="border-radius: 12px;" placeholder="Họ và tên *" required>
+                                    </div>
+
+                                    <!-- Email -->
+                                    <div class="col-md-6">
+                                        <input type="email" name="email" class="form-control border-0 py-3 shadow-sm" style="border-radius: 12px;" placeholder="Email *" required>
+                                    </div>
+
+                                    <!-- Ngày sinh (Đã chuyển lên cạnh Email cho cân đối) -->
+                                    <div class="col-md-6">
+                                        <div class="input-group shadow-sm" style="border-radius: 12px; overflow: hidden;">
+                                            <span class="input-group-text border-0 bg-white text-muted small">Ngày sinh</span>
+                                            <input type="date" name="dob" id="dobInput" class="form-control border-0 py-3" max="2025-12-31" required>
+                                        </div>
+                                    </div>
+
+                                    <!-- Mạng xã hội -->
+                                    <div class="col-md-12">
+                                        <input type="url" name="social_link" class="form-control border-0 py-3 shadow-sm" style="border-radius: 12px;" placeholder="Link Facebook / LinkedIn / Instagram">
+                                    </div>
+
+                                    <!-- Địa chỉ -->
+                                    <div class="col-md-12">
+                                        <input type="text" name="address" class="form-control border-0 py-3 shadow-sm" style="border-radius: 12px;" placeholder="Địa chỉ hiện tại">
+                                    </div>                                   
+
+                                    <!-- Vai trò -->
+                                    <div class="col-md-12">
+                                        <select name="role" class="form-select border-0 py-3 shadow-sm" style="border-radius: 12px;">
+                                            <option value="volunteer">Tình nguyện viên</option>
+                                            <option value="partner">Đối tác / Chuyên gia</option>
+                                            <option value="donor">Nhà tài trợ</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-dark w-100 py-3 fw-bold shadow-lg" style="border-radius: 50px; background: #1a1a1a;">GỬI YÊU CẦU ĐĂNG KÝ</button>
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <input type="email" name="email" class="form-control border-0 py-3 shadow-sm" style="border-radius: 12px;" placeholder="email@vi-du.com" required>
-                                </div>
-                                <div class="mb-4">
-                                    <select name="role" class="form-select border-0 py-3 shadow-sm" style="border-radius: 12px;">
-                                        <option value="volunteer">Tình nguyện viên</option>
-                                        <option value="partner">Đối tác / Chuyên gia</option>
-                                        <option value="donor">Nhà tài trợ</option>
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn btn-dark w-100 py-3 fw-bold shadow" style="border-radius: 50px;" data-vi="GỬI YÊU CẦU ĐĂNG KÝ" data-en="SEND REQUEST">GỬI YÊU CẦU ĐĂNG KÝ</button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- MODAL THÀNH CÔNG (Giữ nguyên bên dưới section) -->
+        <div id="volunteerSuccessModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(5px);">
+            <div style="background:white; padding:40px; border-radius:30px; text-align:center; max-width:450px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); border: 2px solid #008D42;">
+                <div style="font-size:60px; color:#E30613; margin-bottom:20px; animation: heartBeat 1.2s infinite;">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h2 style="font-family:'Montserrat', sans-serif; font-weight:800; color:#008D42; margin-bottom:15px;">ĐĂNG KÝ THÀNH CÔNG!</h2>
+                <p style="font-family:'Montserrat', sans-serif; color:#444; line-height:1.6; margin-bottom:25px;">
+                    Cảm ơn <b id="display_name">bạn</b> đã mở rộng vòng tay nhân ái. <br>
+                    Một email xác nhận đã được gửi đến bạn. 🌹
+                </p>
+                <button onclick="closeVolunteerModal()" style="background:#008D42; color:white; border:none; padding:12px 40px; border-radius:50px; font-weight:700; cursor:pointer; transition: 0.3s; width: 100%;">TUYỆT VỜI</button>
+            </div>
+        </div>
 
         <!-- ĐỐI TÁC & NHÀ HẢO TÂM -->
         <section class="section-padding" style="background-color: #ffffff;">
@@ -627,6 +945,11 @@ Template Name: Trang Chu Art - All In One
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Chuyển ngôn ngữ
+        script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        // 1. Chuyển ngôn ngữ
         function changeLang(lang) {
             document.querySelectorAll('[data-vi]').forEach(el => { 
                 el.innerText = el.getAttribute('data-' + lang); 
@@ -635,10 +958,11 @@ Template Name: Trang Chu Art - All In One
             document.getElementById('btn-en').classList.toggle('active', lang === 'en');
         }
 
-        // Tạo cánh hoa
+        // 2. Tạo cánh hoa rơi
         function createPetals() {
             const container = document.getElementById('petal-container');
             if(!container) return;
+            container.innerHTML = ''; // Xóa cánh hoa cũ nếu có
             for (let i = 0; i < 25; i++) {
                 const petal = document.createElement('div');
                 petal.classList.add('petal');
@@ -650,21 +974,7 @@ Template Name: Trang Chu Art - All In One
             }
         }
 
-        // Tắt loading
-        window.addEventListener('load', function() {
-            createPetals();
-            setTimeout(() => {
-                const preloader = document.getElementById('preloader');
-                if(preloader) { 
-                    preloader.style.opacity = '0'; 
-                    setTimeout(() => { 
-                        preloader.style.display = 'none'; 
-                    }, 800); 
-                }
-            }, 1200);
-        });
-
-        // Cookie functions
+        // 3. Cookie functions
         function acceptCookies() {
             const banner = document.getElementById('cookie-banner');
             if (banner) {
@@ -683,11 +993,27 @@ Template Name: Trang Chu Art - All In One
             sessionStorage.setItem('LRF_Cookie_Status', 'rejected');
         }
 
-        // Hiển thị cookie banner
+        // 4. KHỞI TẠO TOÀN BỘ KHI TRANG LOAD XONG
         window.addEventListener('load', function() {
+            
+            // Khởi tạo Hero Slider
+            const heroSwiper = new Swiper('.hero-swiper', {
+                loop: true,
+                effect: 'fade',
+                fadeEffect: { crossFade: true },
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                speed: 1500,
+            });
+
+            // Khởi tạo cánh hoa
+            createPetals();
+
+            // Hiển thị cookie banner nếu chưa chọn
             const isAccepted = localStorage.getItem('LRF_Cookie_Status');
             const isRejected = sessionStorage.getItem('LRF_Cookie_Status');
-
             if (!isAccepted && !isRejected) {
                 setTimeout(() => {
                     const banner = document.getElementById('cookie-banner');
@@ -697,27 +1023,66 @@ Template Name: Trang Chu Art - All In One
                     }
                 }, 2000);
             }
-        });
+
+            // TẮT LOADING (Preloader)
+            const preloader = document.getElementById('preloader');
+            if(preloader) { 
+                preloader.style.opacity = '0'; 
+                setTimeout(() => { 
+                    preloader.style.display = 'none'; 
+                }, 800); 
+            }
+        }); // <-- Đóng dấu ngoặc quan trọng ở đây
 
         // Xử lý form tình nguyện viên
-        document.getElementById('volunteerForm')?.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            
-            fetch('<?php echo get_template_directory_uri(); ?>/process_join.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                alert('Đăng ký thành công! Cảm ơn bạn đã đăng ký.');
-                this.reset();
-            })
-            .catch(error => {
-                alert('Có lỗi xảy ra. Vui lòng thử lại.');
-            });
-        });
+        function closeVolunteerModal() {
+    document.getElementById('volunteerSuccessModal').style.display = 'none';
+    // location.reload(); // Có thể load lại trang nếu muốn
+}
+
+document.getElementById('volunteerForm').onsubmit = function(e) {
+    e.preventDefault();
+    
+    // 1. Kiểm tra năm sinh
+    const dobValue = document.getElementById('dobInput').value;
+    if (dobValue) {
+        const birthYear = new Date(dobValue).getFullYear();
+        const currentYear = 2026; // Theo yêu cầu của bạn
+
+        if (birthYear >= currentYear) {
+            alert("Ngày sinh không hợp lệ! Vui lòng chọn năm sinh trước năm " + currentYear);
+            return; // Dừng gửi form
+        }
+    }
+
+    const btn = this.querySelector('button[type="submit"]');
+    const originalText = btn.innerText;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> ĐANG XỬ LÝ...';
+
+    const fd = new FormData(this);
+    fd.append('action', 'register_volunteer');
+
+    fetch('<?php echo admin_url('admin-ajax.php'); ?>', {
+        method: 'POST',
+        body: fd
+    })
+    .then(r => r.json())
+    .then(res => {
+        if(res.success) {
+            document.getElementById('display_name').innerText = fd.get('fullname');
+            document.getElementById('volunteerSuccessModal').style.display = 'flex';
+            this.reset();
+        } else {
+            alert("Lỗi: " + res.data.message);
+        }
+    })
+    .catch(err => alert("Lỗi kết nối server!"))
+    .finally(() => {
+        btn.disabled = false;
+        btn.innerText = originalText;
+    });
+};
     </script>
     <?php wp_footer(); ?>
 </body>

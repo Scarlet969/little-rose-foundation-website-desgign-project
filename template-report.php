@@ -563,6 +563,60 @@ Template Name: Báo Cáo Tài Chính - Luxury Header Fix
         font-weight: 400;
         margin-top: 40px;
     }
+    /* Hiện menu khi hover cấp 1 */
+        .lrf-dropdown:hover > .dropdown-menu {
+            display: block;
+            margin-top: 0;
+        }
+
+        /* Hiện menu con cấp 3 khi hover (Nested Dropdown) */
+        .lrf-dropdown .dropend:hover > .dropdown-menu {
+            display: block;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            margin-left: 0;
+        }
+
+        /* Style cho Dropdown Item giống ảnh mẫu */
+        .lrf-dropdown .dropdown-menu {
+            border-radius: 10px;
+            padding: 10px 0;
+            min-width: 240px;
+            background: #ffffff;
+            animation: fadeInMenu 0.3s ease;
+        }
+
+        .lrf-dropdown .dropdown-item {
+            padding: 12px 20px;
+            color: #333 !important;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #f1f1f1; /* Đường kẻ phân cách nhẹ */
+            transition: all 0.2s ease;
+        }
+
+        .lrf-dropdown .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .lrf-dropdown .dropdown-item:hover {
+            background-color: #f8f9fa;
+            color: var(--maroon-dark) !important; /* Đổi màu khi hover */
+            padding-left: 25px; /* Hiệu ứng nhích sang phải nhẹ */
+        }
+
+        /* Hiệu ứng xuất hiện mượt */
+        @keyframes fadeInMenu {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Fix cho mobile: Vẫn cho click nếu cần */
+        @media (max-width: 991px) {
+            .lrf-dropdown .dropdown-menu { position: static; display: none; }
+            .lrf-dropdown.show .dropdown-menu { display: block; }
+        }
 </style>
 <?php wp_head(); ?>
 </head>
@@ -586,9 +640,47 @@ Template Name: Báo Cáo Tài Chính - Luxury Header Fix
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto fw-bold align-items-center">
                 <li class="nav-item"><a class="nav-link px-3" href="<?php echo home_url('/'); ?>" data-vi="Trang chủ" data-en="Home">Trang chủ</a></li>
-                <li class="nav-item"><a class="nav-link px-3" href="<?php echo home_url('/about/'); ?>" data-vi="Về chúng tôi" data-en="About Us">Về chúng tôi</a></li>
-                <li class="nav-item"><a class="nav-link px-3" href="<?php echo home_url('/project/'); ?>" data-vi="Chương trình" data-en="Programs">Chương trình</a></li>
-                <li class="nav-item"><a class="nav-link active text-success px-3" href="<?php echo home_url('/bao-cao/'); ?>" data-vi="Báo cáo tài chính" data-en="Reports">Báo cáo tài chính</a></li>
+                <!-- Về chúng tôi -->
+                    <li class="nav-item dropdown lrf-dropdown">
+                        <a class="nav-link dropdown-toggle fw-bold px-3" href="<?php echo home_url('/about/'); ?>" id="aboutDropdown" role="button" data-vi="Về chúng tôi" data-en="About Us">
+                            Về chúng tôi
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="aboutDropdown">
+                            <!-- Cấp 2: Đội ngũ nhân sự (Có menu con cấp 3) -->
+                            <li class="dropend">
+                                <a class="dropdown-item d-flex justify-content-between align-items-center fw-bold" href="<?php echo home_url('/nhan-su'); ?>" data-vi="Đội ngũ nhân sự" data-en="LRF’s Board and Team">
+                                    Đội ngũ nhân sự <i class="fas fa-chevron-right ms-2" style="font-size: 0.7rem;"></i>
+                                </a>
+                                <!-- MENU CON CẤP 3 (Hiện ra khi hover vào Đội ngũ) -->
+                                <ul class="dropdown-menu shadow border-0 submenu-left">
+                                    <li><a class="dropdown-item" href="<?php echo home_url('/nhan-su/?cat=board'); ?>" data-vi="Hội đồng quản lý" data-en="Board of Directors">Hội đồng quản lý</a></li>
+                                    <li><a class="dropdown-item" href="<?php echo home_url('/nhan-su/?cat=control'); ?>" data-vi="Ban kiểm soát" data-en="Supervisory Committee">Ban kiểm soát</a></li>
+                                    <li><a class="dropdown-item" href="<?php echo home_url('/nhan-su/?cat=advisor'); ?>" data-vi="Ban cố vấn" data-en="Advisory Board">Ban cố vấn</a></li>
+                                </ul>
+                            </li>
+
+                            <!-- Các mục khác của cấp 2 -->
+                            <li><a class="dropdown-item fw-bold" href="<?php echo home_url('/tam-nhin-su-menh'); ?>" data-vi="Tầm nhìn, Sứ mệnh và Giá trị" data-en="Vision, Mission, Values">Tầm nhìn, Sứ mệnh và Giá trị</a></li>
+                            <li><a class="dropdown-item fw-bold" href="<?php echo home_url('/gia-tri-cot-loi'); ?>" data-vi="Giá trị cốt lõi" data-en="Core Commitments">Giá trị cốt lõi</a></li>
+                        </ul>
+                    </li>
+                <li class="nav-item"><a class="nav-link px-3" href="<?php echo home_url('/projects/'); ?>" data-vi="Chương trình" data-en="Programs">Chương trình</a></li>
+                <!-- Báo cáo tài chính -->
+                    <li class="nav-item dropdown lrf-dropdown">
+                        <a class="nav-link dropdown-toggle fw-bold px-3" href="<?php echo home_url('/bao-cao/'); ?>" id="aboutDropdown" role="button" data-vi="Báo cáo tài chính" data-en="Reports">
+                            Báo cáo tài chính
+                        </a>
+                        <ul class="dropdown-menu shadow border-0" aria-labelledby="aboutDropdown">
+                            <!-- Cấp 2: Đội ngũ nhân sự (Có menu con cấp 3) -->
+                            <li class="dropend">
+                                <a class="dropdown-item d-flex justify-content-between align-items-center fw-bold" href="<?php echo home_url('/da-hoan-thanh'); ?>" data-vi="Dự án đã hoàn thành" data-en="Completed Projects">
+                                    Dự án đã hoàn thành <i class="fas fa-chevron-right ms-2" style="font-size: 0.7rem;"></i>
+                                </a>                                
+                            </li>
+                            <!-- Các mục khác của cấp 2 -->
+                            <li><a class="dropdown-item fw-bold" href="<?php echo home_url('/dang-trien-khai'); ?>" data-vi="Dự án đang triển khai" data-en="Active Projects">Dự án đang triển khai</a></li>
+                        </ul>
+                    </li>
                 <li class="nav-item"><a class="nav-link px-3" href="<?php echo home_url('/news/'); ?>" data-vi="Tin tức" data-en="News">Tin tức</a></li>
                 <li class="nav-item"><a class="btn btn-donate ms-lg-3 px-4 py-2 shadow-sm" href="<?php echo home_url('/donate/'); ?>" data-vi="ĐÓNG GÓP" data-en="DONATE">ĐÓNG GÓP</a></li>
                 <li class="nav-item d-flex ms-lg-3 align-items-center">
