@@ -25,7 +25,7 @@ ________________________________________
 ________________________________________
 "To all we are love" - Let technology be the pulse of humanity.
 ________________________________________
-*** Link website: https://petal-three-lrf.infinityfreeapp.com/
+🔗 Link website: https://petal-three-lrf.infinityfreeapp.com/
 
 Vietnamese version
 
@@ -63,8 +63,7 @@ ________________________________________
 1.	Clone repository:	git clone https://github.com/yourusername/little-rose-foundation.git
 2.	Import file database.sql vào MySQL (XAMPP / Laragon).
 3.	Cập nhật thông tin kết nối trong db_config.php.
-4.	Truy cập website tại:
-5.	http://localhost/little-rose-foundation/
+4.	Truy cập website tại: http://localhost/little-rose-foundation/
 ________________________________________
 “To all we are love” – Hãy để công nghệ trở thành nhịp đập của lòng nhân ái.
 🔗 Link website:
