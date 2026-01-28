@@ -1,4 +1,6 @@
-English version
+**ENGLISH VERSION**
+
+
 📌 PROJECT OVERVIEW
 
 
@@ -73,7 +75,8 @@ ________________________________________
 🔗 Link website: https://petal-three-lrf.infinityfreeapp.com/
 
 
-Vietnamese version
+**VIETNAMESE VERSION**
+
 
 📌 TỔNG QUAN VỀ DỰ ÁN
 
