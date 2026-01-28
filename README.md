@@ -6,6 +6,8 @@
 
 
 Developed by team Petal Three (Gia Dinh University), this project is a Service Learning initiative for the Little Rose Foundation (LRF). We transformed a traditional information site into a transparent digital platform, emphasizing user experience (UX), automation, and trust.
+
+
 ✨KEY INNOVATIVE FEATURES
 
 
